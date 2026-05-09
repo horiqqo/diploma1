@@ -7,4 +7,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('/lessons', [PageController::class, 'showLessonsPage'])->name('lessons');
     Route::get('/subjects', [PageController::class, 'showSubjectsPage'])->name('subjects');
     Route::get('/tests', [PageController::class, 'showTestsPage'])->name('tests');
+    Route::get('/profile', [PageController::class, 'showProfilePage'])->name('profile');
 
