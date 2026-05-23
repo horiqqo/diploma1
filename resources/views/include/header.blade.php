@@ -22,7 +22,7 @@
             </ul>
         </div>
 
-        <div class="flex flex-1 justify-end items-center gap-5">
+        <div class="flex flex-1 justify-end items-center gap-7">
             <button class="transition hover:scale-110 duration-200 cursor-pointer">
                 <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-7 h-7 object-contain">
             </button>

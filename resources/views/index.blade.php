@@ -9,12 +9,12 @@
     <title>@yield('title', 'Обучение общеобразовательным программам')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 <header>
     @include('include.header')
 </header>
 
-<main>
+<main class="flex-1">
     @yield('content')
 </main>
 

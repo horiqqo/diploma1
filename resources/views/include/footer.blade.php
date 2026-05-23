@@ -1,0 +1,29 @@
+<footer class="border-t border-base-300">
+    <div class="max-w-[1080px] mx-auto px-6 py-10 flex items-start justify-between gap-10">
+
+        <div class="flex items-center gap-3 max-w-[200px]">
+            <div class="w-10 h-10 bg-base-200 shrink-0 rounded"></div>
+            <span class="text-sm text-base-content/70">Система дистанционного обучения МОАУ СОШ №13</span>
+        </div>
+
+
+        <div class="flex flex-col gap-2">
+            <span class="font-medium">Навигация</span>
+            <a href="{{ route('home') }}" class="text-base-content/70 hover:text-primary transition">Главная</a>
+            <a href="{{ route('subjects') }}" class="text-base-content/70 hover:text-primary transition">Предметы</a>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <span class="font-medium">Контакты</span>
+            <span class="text-base-content/70">Телефон: 8 (34783) 5-14-37</span>
+            <span class="text-base-content/70">Почта: soch13-neft@mail.ru</span>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <span class="font-medium">Документы</span>
+            <a href="#" class="text-base-content/70 hover:text-primary transition">Политика обработки персональных данных</a>
+        </div>
+
+
+    </div>
+</footer>
