@@ -1,5 +1,14 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: #174FC4;
+    --color-secondary: #043292;
+}
 
 @font-face {
     font-family: 'Roboto';

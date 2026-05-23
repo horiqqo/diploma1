@@ -11,7 +11,7 @@ class PageController extends Controller
     }
 
     public function showLessonsPage(){
-        return view('pages.lessons');
+        return view('pages.lesson');
     }
 
     public function showSubjectsPage(){

@@ -11,11 +11,11 @@
 </head>
 <body>
 <header>
-        @include('include.header')
+    @include('include.header')
 </header>
 
 <main>
-        @yield('content')
+    @yield('content')
 </main>
 
 <footer>
