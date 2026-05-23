@@ -1,5 +1,5 @@
 <header class="w-full border border-base-200 bg-base-100">
-    <div class="navbar px-6 min-h-[90px]">
+    <div class="navbar px-6 min-h-[30px]">
 
         <div class="flex-1">
             <a class="text-base ">

@@ -38,19 +38,19 @@
         <section class="py-2 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1">
                     <img src="{{ asset('../images/icons/book-open.svg') }}" alt="Учебные материалы" class="w-7 h-7 object-contain">
                     <h3 class="font-semibold text-lg">Учебные материалы</h3>
                     <p class="text-base-content/60">Все лекции, презентации и задания собраны в одном месте и доступны в любое время</p>
                 </div>
 
-                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1">
                     <img src="{{ asset('../images/icons/check-list.svg') }}" alt="Тесты и задания" class="w-6 h-6 object-contain">
                     <h3 class="font-semibold text-lg">Тесты и задания</h3>
                     <p class="text-base-content/60">Проверяйте знания с помощью тестов и получайте мгновенную обратную связь</p>
                 </div>
 
-                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1">
                     <img src="{{ asset('../images/icons/stats.svg') }}" alt="Статистика успеваемости" class="w-5 h-5 object-contain">
                     <h3 class="font-semibold text-lg">Статистика успеваемости</h3>
                     <p class="text-base-content/60">Следите за своим прогрессом и результатами по каждому предмету</p>
@@ -61,14 +61,17 @@
 
         <section class="py-2 flex items-center gap-10 px-4">
             <div class="hidden md:block w-[420px] shrink-0">
-               <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}">
+                <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}">
             </div>
 
-            <div class="max-w-md">
-                <h2 class="text-2xl font-bold">Учитесь в удобном темпе</h2>
-                <p class="text-base-content/70 mt-3 text-lg">
-                    Получайте доступ к материалам, тестам и статистике успеваемости в любое время
-                </p>
+            <div class="flex items-stretch p-5 rounded-xl gap-4 bg-primary/3">
+                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
+                <div class="max-w-md">
+                    <h2 class="text-2xl font-bold">Учитесь в удобном темпе</h2>
+                    <p class="text-base-content/70 mt-3 text-lg">
+                        Получайте доступ к материалам, тестам и статистике успеваемости в любое время
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -76,21 +79,33 @@
 
         <section class="py-16 flex items-center justify-between gap-10 px-4">
 
-        <div class="flex flex-col gap-6">
-            <h2 class="text-2xl font-bold">Перейти к учебным предметам</h2>
+            <div class="flex flex-col gap-4">
+                <h2 class="text-2xl font-bold">Перейти к учебным предметам</h2>
 
-            <div class="grid grid-cols-2 gap-4">
-                <a href="#" class="card border border-base-200 hover:border-primary p-6 text-primary font-medium text-center transition">Информатика</a>
-                <a href="#" class="card border border-base-200 hover:border-primary p-6 text-primary font-medium text-center transition">Математика</a>
-                <a href="#" class="card border border-base-200 hover:border-primary p-6 text-primary font-medium text-center transition">Английский язык</a>
-                <a href="#" class="card border border-base-200 hover:border-primary p-6 text-primary font-medium text-center transition">Физика</a>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center gap-4 min-h-[70px]">
+                        <span class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-lg shrink-0">И</span>
+                        Информатика
+                    </a>
+                    <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center gap-4 min-h-[70px]">
+                        <span class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-lg shrink-0">М</span>
+                        Математика
+                    </a>
+                    <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center gap-4 min-h-[70px]">
+                        <span class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-lg shrink-0">Ая</span>
+                        Английский язык
+                    </a>
+                    <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center gap-4 min-h-[70px]">
+                        <span class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-lg shrink-0">Ф</span>
+                        Физика
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="hidden md:block w-[380px] shrink-0">
-            <img src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-full object-contain">
-        </div>
+            <div class="hidden md:block w-[380px] shrink-0">
+                <img src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-full object-contain">
+            </div>
 
-    </section>
+        </section>
 
 @endsection
