@@ -10,16 +10,12 @@ class PageController extends Controller
         return view('pages.home');
     }
 
-    public function showLessonsPage(){
-        return view('pages.lesson');
+    public function showThemesPage(){
+        return view('pages.themes');
     }
 
     public function showSubjectsPage(){
         return view('pages.subjects');
-    }
-
-    public function showTestsPage(){
-        return view('pages.tests');
     }
 
     public function showProfilePage(){
