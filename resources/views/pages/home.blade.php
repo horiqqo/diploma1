@@ -35,6 +35,30 @@
 
    {{-- <div class="border-t border-base-300"></div>--}}
 
+        <section class="py-2 px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                    <img src="{{ asset('../images/icons/book-open.svg') }}" alt="Учебные материалы" class="w-7 h-7 object-contain">
+                    <h3 class="font-semibold text-lg">Учебные материалы</h3>
+                    <p class="text-base-content/60">Все лекции, презентации и задания собраны в одном месте и доступны в любое время</p>
+                </div>
+
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                    <img src="{{ asset('../images/icons/check-list.svg') }}" alt="Тесты и задания" class="w-6 h-6 object-contain">
+                    <h3 class="font-semibold text-lg">Тесты и задания</h3>
+                    <p class="text-base-content/60">Проверяйте знания с помощью тестов и получайте мгновенную обратную связь</p>
+                </div>
+
+                <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1">
+                    <img src="{{ asset('../images/icons/stats.svg') }}" alt="Статистика успеваемости" class="w-5 h-5 object-contain">
+                    <h3 class="font-semibold text-lg">Статистика успеваемости</h3>
+                    <p class="text-base-content/60">Следите за своим прогрессом и результатами по каждому предмету</p>
+                </div>
+
+            </div>
+        </section>
+
         <section class="py-2 flex items-center gap-10 px-4">
             <div class="hidden md:block w-[420px] shrink-0">
                <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}">
