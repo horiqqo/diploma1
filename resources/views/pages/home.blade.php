@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="max-w-5xl mx-auto px-6">
-
         <section class="py-16 flex items-center justify-between gap-10 px-4">
             <div class="flex flex-col gap-6 max-w-lg">
                 <div>
@@ -14,18 +13,16 @@
                         к учебным материалам и тестам.
                     </p>
                 </div>
-
                 <div class="flex items-center gap-4 mt-10">
-                    <a href="{{ route('subjects')}}" class="btn px-15 py-6 text-lg btn-primary text-base-100 font-normal transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95">
+                    <a href="{{ route('subjects')}}" class="btn  px-15 py-6 text-lg btn-primary text-base-100 font-normal transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95">
                         К предметам
                     </a>
-                    <a href="{{route('profile')}}"
+                    <a href="{{route('register')}}"
                        class="btn px-15 py-6 text-lg text-secondary font-normal bg-base-100 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md active:scale-95">
                         В профиль
                     </a>
                 </div>
             </div>
-
             <div class="hidden md:block w-[420px] shrink-0">
                 <video autoplay loop muted playsinline class="w-full object-contain">
                     <source src="{{ asset('../videos/hero.mp4') }}" type="video/mp4">
@@ -37,7 +34,6 @@
 
         <section class="py-2 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
                 <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1">
                     <img src="{{ asset('../images/icons/book-open.svg') }}" alt="Учебные материалы" class="w-7 h-7 object-contain">
                     <h3 class="font-semibold text-lg">Учебные материалы</h3>
@@ -55,7 +51,6 @@
                     <h3 class="font-semibold text-lg">Статистика успеваемости</h3>
                     <p class="text-base-content/60">Следите за своим прогрессом и результатами по каждому предмету</p>
                 </div>
-
             </div>
         </section>
 

@@ -25,4 +25,12 @@ class PageController extends Controller
     public function showProfilePage(){
         return view('pages.profile');
     }
+
+    public function showRegisterPage(){
+        return view('auth.register');
+    }
+
+    public function showLoginPage(){
+        return view('auth.login');
+    }
 }
