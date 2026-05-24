@@ -32,7 +32,9 @@
             </button>
 
             <button class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain">
+                <a href="{{route('profile')}}">
+                    <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain">
+                </a>
             </button>
 
         </div>
