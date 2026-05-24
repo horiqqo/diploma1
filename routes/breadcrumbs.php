@@ -16,3 +16,8 @@ Breadcrumbs::for('lesson', function (BreadcrumbTrail $trail) {
     $trail->parent('themes');
     $trail->push('Урок', route('lesson'));
 });
+
+Breadcrumbs::for('test', function (BreadcrumbTrail $trail) {
+    $trail->parent('lesson');
+    $trail->push('Тест', route('test'));
+});

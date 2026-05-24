@@ -22,6 +22,16 @@ class PageController extends Controller
         return view('pages.profile');
     }
 
+    public function showLessonPage(){
+        return view('pages.lesson');
+    }
+
+    public function showTestsPage()
+    {
+        return view('pages.test');
+    }
+
+
     public function showRegisterPage(){
         return view('auth.register');
     }

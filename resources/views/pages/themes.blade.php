@@ -8,11 +8,11 @@
         {{ Breadcrumbs::render('themes') }}
 
 
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-center mb-6">
 
 
             <div class="hidden md:block w-[220px]">
-                <img src="{{ asset('../images/illustration/subject-detail.webp') }}" alt="" class="w-full object-contain">
+                <img src="{{ asset('../images/illustration/illustration_2.webp') }}" alt="" class="w-full object-contain">
             </div>
 
         </div>
