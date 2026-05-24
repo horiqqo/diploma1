@@ -30,8 +30,6 @@
             </div>
         </section>
 
-   {{-- <div class="border-t border-base-300"></div>--}}
-
         <section class="py-2 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="card border border-base-200 p-6 flex flex-col gap-3 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1">
@@ -59,18 +57,60 @@
                 <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}">
             </div>
 
-            <div class="flex items-stretch p-5 rounded-xl gap-4 bg-primary/3">
-                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
-                <div class="max-w-md">
-                    <h2 class="text-2xl font-bold">Учитесь в удобном темпе</h2>
-                    <p class="text-base-content/70 mt-3 text-lg">
-                        Получайте доступ к материалам, тестам и статистике успеваемости в любое время
-                    </p>
-                </div>
-            </div>
-        </section>
+            <section class="py-2 px-4">
 
-    {{--<div class="border-t border-base-300"></div>--}}
+                <div class="relative">
+
+                    <div class="relative h-[220px] w-[420px] ">
+
+                        <div class="slide-text absolute inset-0 transition-all duration-500 ease-in-out opacity-100 scale-100">
+                            <div class="flex items-stretch p-5 rounded-xl gap-4 bg-primary/3 h-full">
+                                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
+                                <div class="max-w-md">
+                                    <h2 class="text-2xl font-bold">Учитесь в удобном темпе</h2>
+                                    <p class="text-base-content/70 mt-3 text-lg">
+                                        Получайте доступ к материалам, тестам и статистике успеваемости в любое время
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-text absolute inset-0 transition-all duration-500 ease-in-out opacity-0 scale-90">
+                            <div class="flex items-stretch p-5 rounded-xl gap-4 bg-primary/3 h-full">
+                                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
+                                <div class="max-w-md">
+                                    <h2 class="text-2xl font-bold">Взаимодействуйте с учителями</h2>
+                                    <p class="text-base-content/70 mt-3 text-lg">
+                                        Задавайте вопросы и получайте обратную связь напрямую от преподавателей
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-text absolute inset-0 transition-all duration-500 ease-in-out opacity-0 scale-90">
+                            <div class="flex items-stretch p-5 rounded-xl gap-4 bg-primary/3 h-full">
+                                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
+                                <div class="max-w-md">
+                                    <h2 class="text-2xl font-bold">Следите за своим прогрессом</h2>
+                                    <p class="text-base-content/70 mt-3 text-lg">
+                                        Смотрите результаты тестов и динамику успеваемости по каждому предмету
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-center gap-2 mt-5">
+                        <button onclick="goToText(0)" class="text-dot w-3 h-3 rounded-full bg-primary transition-all duration-300 cursor-pointer"></button>
+                        <button onclick="goToText(1)" class="text-dot w-3 h-3 rounded-full bg-base-300 transition-all duration-300 cursor-pointer"></button>
+                        <button onclick="goToText(2)" class="text-dot w-3 h-3 rounded-full bg-base-300 transition-all duration-300 cursor-pointer"></button>
+                    </div>
+
+                </div>
+
+            </section>
+        </section>
 
         <section class="py-16 flex items-center justify-between gap-10 px-4">
 
