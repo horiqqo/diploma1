@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/profile', [PageController::class, 'showProfilePage'])->name('profile');
     Route::get('/lesson', [PageController::class, 'showLessonPage'])->name('lesson');
     Route::get('/test', [PageController::class, 'showTestsPage'])->name('test');
+    Route::get('/dashboard', [PageController::class, 'showDashboardPage'])->name('dashboard');
+    Route::get('/admin-subjects', [PageController::class, 'showAdminSubjectsPage'])->name('admin-subjects');
+    Route::get('/admin-users', [PageController::class, 'showAdminUsersListPage'])->name('admin-users');
 
 
     Route::get('/register', [PageController::class, 'showRegisterPage'])->name('register');

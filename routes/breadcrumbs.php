@@ -21,3 +21,19 @@ Breadcrumbs::for('test', function (BreadcrumbTrail $trail) {
     $trail->parent('lesson');
     $trail->push('Тест', route('test'));
 });
+
+
+
+Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
+    $trail->push('Панель администраторы', route('dashboard'));
+});
+
+Breadcrumbs::for('admin-users', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Список пользователей', route('admin-users'));
+});
+
+Breadcrumbs::for('admin-subjects', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Список предметов', route('admin-subjects'));
+});

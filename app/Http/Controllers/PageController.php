@@ -31,6 +31,9 @@ class PageController extends Controller
         return view('pages.test');
     }
 
+    public function showDashboardPage(){
+        return view('pages.admin.dashboard');
+    }
 
     public function showRegisterPage(){
         return view('auth.register');
@@ -38,5 +41,19 @@ class PageController extends Controller
 
     public function showLoginPage(){
         return view('auth.login');
+    }
+
+
+
+
+
+    public function showAdminSubjectsPage()
+    {
+        return view('pages.admin.admin-subjects');
+    }
+
+    public function showAdminUsersListPage()
+    {
+        return view('pages.admin.users-list');
     }
 }
