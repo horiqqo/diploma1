@@ -7,7 +7,6 @@
         {{ Breadcrumbs::render('admin-users') }}
 
         <div class="flex items-center justify-between">
-            <a href="#" class="btn btn-primary font-normal">Создать предмет</a>
             <div class="flex items-center gap-3">
                 <button class="btn bg-base-100 border border-base-300 font-normal">Фильтрация</button>
                 <button class="btn bg-base-100 border border-base-300 font-normal">Сортировка</button>
@@ -15,9 +14,7 @@
         </div>
 
         <div class="flex gap-3">
-            <input
-                type="text"
-                placeholder="Поиск..."
+            <input type="text" placeholder="Поиск..."
                 class="input input-bordered w-full focus:outline-none focus:border-primary transition-all duration-300"
             />
             <button class="btn btn-primary px-8 font-normal">Поиск</button>

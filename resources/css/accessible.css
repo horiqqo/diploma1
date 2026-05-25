@@ -1,0 +1,33 @@
+html.accessible-1 body {
+    font-size: 1.1rem;
+}
+html.accessible-1 * {
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+}
+
+
+html.accessible-2 body {
+    font-size: 1.25rem;
+}
+html.accessible-2 * {
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+}
+html.accessible-2 a {
+    text-decoration: underline;
+}
+
+
+html.accessible-3 body {
+    font-size: 1.4rem;
+    filter: contrast(1.3);
+}
+html.accessible-3 * {
+    line-height: 2;
+    letter-spacing: 0.05em;
+}
+html.accessible-3 a {
+    text-decoration: underline;
+    font-weight: bold;
+}
