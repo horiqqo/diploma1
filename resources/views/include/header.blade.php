@@ -21,27 +21,70 @@
 
         <div class="hidden md:flex flex-1 justify-end items-center gap-7">
             <button id="btn-theme" class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-7 h-7 object-contain">
+                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-7 h-7 object-contain" loading="lazy">
             </button>
-            <button id="btn-accessible" class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/eye.svg') }}" alt="Версия для слабовидящих" class="w-7 h-7 object-contain">
-            </button>
+
+            <div class="relative" id="accessible-wrapper">
+                <button id="btn-accessible" class="transition hover:scale-110 duration-200 cursor-pointer">
+                    <img src="{{ asset('../images/icons/eye.svg') }}" alt="Версия для слабовидящих" class="w-7 h-7 object-contain" loading="lazy">
+                </button>
+
+                <div id="accessible-panel"
+                     class="hidden absolute right-0 top-11 z-50 w-72 bg-base-100 border border-base-200 rounded-xl shadow-2xl p-4 flex flex-col gap-4">
+
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-sm">Для слабовидящих</span>
+                        <button id="accessible-reset" class="text-xs text-base-content/40 hover:text-error transition">
+                            Сбросить
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-base-content/40 uppercase tracking-widest">Размер шрифта</span>
+                        <div class="grid grid-cols-4 gap-1">
+                            <button data-size="0" class="accessible-size-btn btn btn-sm btn-ghost text-xs">Обычный</button>
+                            <button data-size="1" class="accessible-size-btn btn btn-sm btn-ghost">A</button>
+                            <button data-size="2" class="accessible-size-btn btn btn-sm btn-ghost">A+</button>
+                            <button data-size="3" class="accessible-size-btn btn btn-sm btn-ghost font-bold">A++</button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-base-content/40 uppercase tracking-widest">Цветовая схема</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button data-scheme="default"
+                                    class="accessible-scheme-btn btn btn-sm border border-base-300 bg-white text-black hover:bg-white">
+                                Белый
+                            </button>
+                            <button data-scheme="dark"
+                                    class="accessible-scheme-btn btn btn-sm bg-black text-white border-0 hover:bg-neutral-900">
+                                Чёрный
+                            </button>
+                            <button data-scheme="yellow"
+                                    class="accessible-scheme-btn btn btn-sm bg-yellow-300 text-black border-0 hover:bg-yellow-400">
+                                Жёлтый
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <a href="{{route('profile')}}" id="btn-profile" class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain">
+                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain" loading="lazy">
             </a>
         </div>
 
         <div class="flex md:hidden justify-end flex-1">
             <button id="btn-burger" class="cursor-pointer">
-                <img id="burger-icon" src="{{asset('../images/icons/burger-menu.svg')}}" alt="мобильное меню" class="w-7 h-7">
+                <img id="burger-icon" src="{{asset('../images/icons/burger-menu.svg')}}" alt="мобильное меню" class="w-7 h-7" loading="lazy">
             </button>
         </div>
-
     </div>
 
     <div id="mobile-menu"
-              class="hidden fixed inset-0 top-0 z-50 bg-base-100 flex flex-col px-6 py-6 gap-6
-            opacity-0 translate-x-full transition-all duration-300 ease-in-out">
+         class="hidden fixed inset-0 top-0 z-50 bg-base-100 flex flex-col px-6 py-6 gap-6
+                opacity-0 translate-x-full transition-all duration-300 ease-in-out">
 
         <div class="flex items-center justify-between">
             <a class="text-base">logo</a>
@@ -61,15 +104,45 @@
             </a>
         </nav>
 
+        <div class="flex flex-col gap-4 pt-4 border-t border-base-200">
+            <div class="flex flex-col gap-2">
+                <span class="text-xs text-base-content/40 uppercase tracking-widest">Размер шрифта</span>
+                <div class="grid grid-cols-4 gap-1">
+                    <button data-size="0" class="accessible-size-btn btn btn-sm btn-ghost text-xs">Обычный</button>
+                    <button data-size="1" class="accessible-size-btn btn btn-sm btn-ghost">A</button>
+                    <button data-size="2" class="accessible-size-btn btn btn-sm btn-ghost">A+</button>
+                    <button data-size="3" class="accessible-size-btn btn btn-sm btn-ghost font-bold">A++</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <span class="text-xs text-base-content/40 uppercase tracking-widest">Цветовая схема</span>
+                <div class="grid grid-cols-3 gap-2">
+                    <button data-scheme="default"
+                            class="accessible-scheme-btn btn btn-sm border border-base-300 bg-white text-black hover:bg-white">
+                        Белый
+                    </button>
+                    <button data-scheme="dark"
+                            class="accessible-scheme-btn btn btn-sm bg-black text-white border-0 hover:bg-neutral-900">
+                        Чёрный
+                    </button>
+                    <button data-scheme="yellow"
+                            class="accessible-scheme-btn btn btn-sm bg-yellow-300 text-black border-0 hover:bg-yellow-400">
+                        Жёлтый
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div class="flex items-center gap-6 mt-auto pt-6 border-t border-base-200">
             <button id="btn-theme-mobile" class="cursor-pointer transition hover:scale-110 duration-200">
-                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-6 h-6 object-contain">
+                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-6 h-6 object-contain" loading="lazy">
             </button>
-            <button id="btn-accessible-mobile" class="cursor-pointer transition hover:scale-110 duration-200">
-                <img src="{{ asset('../images/icons/eye.svg') }}" alt="Версия для слабовидящих" class="w-6 h-6 object-contain">
+            <button id="accessible-reset-mobile" class="cursor-pointer text-xs text-base-content/40 hover:text-error transition">
+                Сбросить
             </button>
             <a href="{{route('profile')}}" class="cursor-pointer transition hover:scale-110 duration-200">
-                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-6 h-6 object-contain">
+                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-6 h-6 object-contain" loading="lazy">
             </a>
         </div>
 

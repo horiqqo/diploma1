@@ -26,20 +26,20 @@
         <div class="flex flex-col gap-4">
             <h2 class="text-xl font-semibold text-center">Таблица оценок за тестированию</h2>
 
-            <table class="table border border-base-200 rounded-xl w-full">
-                <thead>
-                <tr class="border-b border-base-200">
-                    <th class="p-4 text-left font-medium">Предмет</th>
-                    <th class="p-4 text-center font-medium">Тема</th>
-                    <th class="p-4 text-right font-medium">Оценка</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+            <div class="overflow-x-auto">
+                <table class="table border border-base-200 rounded-xl w-full min-w-[500px]">
+                    <thead>
+                    <tr class="border-b border-base-200">
+                        <th class="p-4 text-left font-medium">Предмет</th>
+                        <th class="p-4 text-center font-medium">Тема</th>
+                        <th class="p-4 text-right font-medium">Оценка</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
     </div>
 
 @endsection

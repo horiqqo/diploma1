@@ -18,7 +18,7 @@
             </p>
 
             <div class="flex justify-center">
-                <img src="#" alt="Иллюстрация" class="rounded-xl max-w-full object-contain">
+                <img src="#" alt="Иллюстрация" class="rounded-xl max-w-full object-contain" loading="lazy">
             </div>
 
             <p class="text-base-content/80 text-lg leading-relaxed">

@@ -16,10 +16,20 @@
 
 @plugin "daisyui/theme" {
     name: "dark";
+
+    --color-base-100: #1e1e2e;
+    --color-base-200: #181825;
+    --color-base-300: #313244;
+    --color-base-content: #cdd6f4;
+
+
     --color-primary: #4A7FE8;
-    --color-secondary: #6B9FFF;
-    --color-base-100: #1a1a2e;
-    --color-base-200: #16213e;
-    --color-base-300: #0f3460;
-    --color-base-content: #e0e0e0;
+    --color-primary-content: #ffffff;
+    --color-secondary: #89b4fa;
+    --color-secondary-content: #1e1e2e;
+
+    --color-info: #89dceb;
+    --color-success: #a6e3a1;
+    --color-warning: #f9e2af;
+    --color-error: #f38ba8;
 }
