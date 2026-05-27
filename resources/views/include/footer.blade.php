@@ -3,8 +3,10 @@
 
         <div class="hidden md:flex items-start justify-between gap-10">
             <div class="flex items-center gap-3 max-w-[200px]">
-                <div class="w-10 h-10 bg-base-200 shrink-0 rounded"></div>
-                <span class="text-sm text-base-content/70">Система дистанционного обучения МОАУ СОШ №13</span>
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-3">
+                    <img src="{{ asset('../images/icons/logo2.svg') }}" alt="логотип" class="w-16 h-16 object-contain" loading="lazy">
+                    <span class="text-sm text-base-content/70">Система дистанционного обучения МОАУ СОШ №13</span>
+                </a>
             </div>
             <div class="flex flex-col gap-2">
                 <span class="font-medium">Навигация</span>

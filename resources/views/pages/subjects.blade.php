@@ -8,7 +8,7 @@
 
         <div class="flex items-end justify-between mb-6">
             <div class="hidden md:block w-[420px]">
-                <img src="{{ asset('../images/illustration/illustration.webp') }}" alt="Предметы" class="w-full object-contain" loading="lazy">
+                <img data-illustration="illustration" src="{{ asset('../images/illustration/illustration.webp') }}" alt="Предметы" class="w-full object-contain" loading="lazy">
             </div>
             <div class="flex items-center gap-3">
                 <button class="btn bg-base-100 border border-base-300 font-normal">Фильтрация</button>

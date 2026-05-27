@@ -1,43 +1,59 @@
-html.accessible-1 body {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    letter-spacing: 0.02em;
+
+html.accessible-scheme-yellow,
+html.accessible-scheme-yellow body {
+    background-color: #ffff00 !important;
+    color: #000 !important;
 }
 
-html.accessible-2 body {
-    font-size: 1.25rem;
-    line-height: 1.9;
-    letter-spacing: 0.04em;
-}
-html.accessible-2 a {
-    text-decoration: underline;
+html.accessible-scheme-yellow header,
+html.accessible-scheme-yellow nav,
+html.accessible-scheme-yellow .navbar,
+html.accessible-scheme-yellow .card,
+html.accessible-scheme-yellow .bg-base-100,
+html.accessible-scheme-yellow .bg-base-200,
+html.accessible-scheme-yellow [class*="bg-base"] {
+    background-color: #ffff00 !important;
+    border-color: #000 !important;
 }
 
-html.accessible-3 body {
-    font-size: 1.4rem;
-    line-height: 2;
-    letter-spacing: 0.05em;
-    filter: contrast(1.3);
+html.accessible-scheme-yellow *:not(button):not(.btn):not(.btn *) {
+    color: #000 !important;
 }
-html.accessible-3 a {
-    text-decoration: underline;
-    font-weight: bold;
+
+html.accessible-scheme-yellow .btn:not(:has(img[data-icon])),
+html.accessible-scheme-yellow button:not(:has(img[data-icon])) {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border-color: #000 !important;
 }
+
+html.accessible-scheme-yellow button:has(img[data-icon]) {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+html.accessible-scheme-yellow img[data-icon],
+html.accessible-scheme-yellow img[data-illustration] {
+    filter: none;
+}
+
+html.accessible-scheme-yellow img:not([data-icon]):not([data-illustration]),
+html.accessible-scheme-yellow video {
+    filter: grayscale(1) contrast(1.4);
+}
+
 
 html.accessible-scheme-dark {
     filter: invert(1) hue-rotate(180deg);
 }
-html.accessible-scheme-dark img,
+
+html.accessible-scheme-dark img:not([data-icon]):not([data-illustration]),
 html.accessible-scheme-dark video,
 html.accessible-scheme-dark iframe {
     filter: invert(1) hue-rotate(180deg);
 }
 
-html.accessible-scheme-yellow body {
-    background-color: #ffff00 !important;
-    color: #000 !important;
-}
-html.accessible-scheme-yellow img,
-html.accessible-scheme-yellow video {
-    filter: grayscale(1) contrast(1.4);
+html.accessible-scheme-dark img[data-icon],
+html.accessible-scheme-dark img[data-illustration] {
+    filter: none;
 }

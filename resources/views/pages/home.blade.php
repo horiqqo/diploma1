@@ -7,7 +7,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between gap-10">
 
                 <div class="w-[280px] md:w-[420px] shrink-0 order-first md:order-last">
-                    <video autoplay loop muted playsinline class="w-full object-contain">
+                    <video autoplay loop muted playsinline class="w-full object-contain rounded-3xl">
                         <source src="{{ asset('../videos/hero.mp4') }}" type="video/mp4">
                     </video>
                 </div>
@@ -61,7 +61,7 @@
 
             <div class="flex items-center gap-10">
                 <div class="hidden md:block w-[420px] shrink-0">
-                    <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}">
+                    <img loading="lazy" class="rounded-3xl" src="{{asset('../images/gifs/books-main.gif')}}">
                 </div>
 
                 <div class="relative w-full">
@@ -111,7 +111,7 @@
 
         <section class="py-10 md:py-16 px-4">
             <div class="flex justify-center md:hidden mb-6">
-                <img src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-[200px] object-contain">
+                <img data-illustration="illustration_1" src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-[200px] object-contain">
             </div>
 
             <div class="flex items-center justify-between gap-10">
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="hidden md:block w-[380px] shrink-0">
-                    <img src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-full object-contain" loading="lazy">
+                    <img data-illustration="illustration_1" src="{{ asset('../images/illustration/illustration_1.webp') }}" alt="Предметы" class="w-full object-contain" loading="lazy">
                 </div>
             </div>
         </section>

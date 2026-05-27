@@ -26,4 +26,9 @@ function updateIcons(theme) {
         const name = el.dataset.icon;
         el.src = `/images/icons/${name}${s}.svg`;
     });
+
+    document.querySelectorAll('[data-illustration]').forEach(el => {
+        const name = el.dataset.illustration;
+        el.src = `/images/illustration/${name}${s}.webp`;
+    });
 }

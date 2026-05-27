@@ -57,6 +57,12 @@ function applyLevel(level) {
 function applyScheme(scheme) {
     const html = document.documentElement;
     html.classList.remove('accessible-scheme-dark', 'accessible-scheme-yellow');
+
+    if (scheme === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }
+
     if (scheme !== 'default') html.classList.add(`accessible-scheme-${scheme}`);
 }
 
