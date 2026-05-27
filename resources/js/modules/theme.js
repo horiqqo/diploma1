@@ -17,13 +17,13 @@ function updateIcons(theme) {
     const d = theme === 'dark';
     const s = d ? '-white' : '';
 
-    const set = (sel, src) => { const el = document.querySelector(sel); if (el) el.src = src; };
+    const themeIcon = d ? 'sun' : 'moon';
+    document.querySelectorAll('[data-icon="theme"]').forEach(el => {
+        el.src = `/images/icons/${themeIcon}.svg`;
+    });
 
-    set('#btn-theme img',             `/images/icons/${d ? 'sun' : 'moon'}.svg`);
-    set('#btn-theme-mobile img',      `/images/icons/${d ? 'sun' : 'moon'}.svg`);
-    set('#btn-accessible img',        `/images/icons/eye${s}.svg`);
-    set('#btn-accessible-mobile img', `/images/icons/eye${s}.svg`);
-    set('#btn-profile img',           `/images/icons/profile${s}.svg`);
-    set('#burger-icon',               `/images/icons/burger-menu${s}.svg`);
-    set('#mobile-menu a img',         `/images/icons/profile${s}.svg`);
+    document.querySelectorAll('[data-icon]:not([data-icon="theme"])').forEach(el => {
+        const name = el.dataset.icon;
+        el.src = `/images/icons/${name}${s}.svg`;
+    });
 }

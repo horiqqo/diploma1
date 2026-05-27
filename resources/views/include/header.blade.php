@@ -1,7 +1,9 @@
 <header class="w-full border border-base-200 bg-base-100">
     <div class="navbar px-6 min-h-[30px]">
         <div class="flex-1">
-            <a class="text-base">logo</a>
+            <a href="{{ route('home') }}" class="inline-flex">
+                <img src="{{ asset('../images/icons/logo2.svg') }}" alt="логотип" class="w-16 h-16 object-contain" loading="lazy">
+            </a>
         </div>
 
         <div class="flex-none hidden md:flex">
@@ -21,12 +23,12 @@
 
         <div class="hidden md:flex flex-1 justify-end items-center gap-7">
             <button id="btn-theme" class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-7 h-7 object-contain" loading="lazy">
+                <img data-icon="theme"  src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-7 h-7 object-contain" loading="lazy">
             </button>
 
-            <div class="relative" id="accessible-wrapper">
+            <div class="relative flex items-center" id="accessible-wrapper">
                 <button id="btn-accessible" class="transition hover:scale-110 duration-200 cursor-pointer">
-                    <img src="{{ asset('../images/icons/eye.svg') }}" alt="Версия для слабовидящих" class="w-7 h-7 object-contain" loading="lazy">
+                    <img data-icon="eye" src="{{ asset('../images/icons/eye.svg') }}" alt="Версия для слабовидящих" class="w-7 h-7 object-contain" loading="lazy">
                 </button>
 
                 <div id="accessible-panel"
@@ -71,13 +73,13 @@
             </div>
 
             <a href="{{route('profile')}}" id="btn-profile" class="transition hover:scale-110 duration-200 cursor-pointer">
-                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain" loading="lazy">
+                <img data-icon="profile" src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain" loading="lazy">
             </a>
         </div>
 
         <div class="flex md:hidden justify-end flex-1">
             <button id="btn-burger" class="cursor-pointer">
-                <img id="burger-icon" src="{{asset('../images/icons/burger-menu.svg')}}" alt="мобильное меню" class="w-7 h-7" loading="lazy">
+                <img data-icon="burger-menu"  id="burger-icon" src="{{asset('../images/icons/burger-menu.svg')}}" alt="мобильное меню" class="w-7 h-7" loading="lazy">
             </button>
         </div>
     </div>
@@ -89,9 +91,9 @@
         <div class="flex items-center justify-between">
             <a class="text-base">logo</a>
             <button id="btn-close" class="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-                </svg>
+
+                    <img data-icon="close"  id="burger-icon" src="{{asset('../images/icons/close.svg')}}" alt="закрыть меню" class="w-7 h-7" loading="lazy">
+
             </button>
         </div>
 
@@ -104,7 +106,7 @@
             </a>
         </nav>
 
-        <div class="flex flex-col gap-4 pt-4 border-t border-base-200">
+        <div class="flex flex-col gap-4 pt-4 border-base-200">
             <div class="flex flex-col gap-2">
                 <span class="text-xs text-base-content/40 uppercase tracking-widest">Размер шрифта</span>
                 <div class="grid grid-cols-4 gap-1">
@@ -136,13 +138,13 @@
 
         <div class="flex items-center gap-6 mt-auto pt-6 border-t border-base-200">
             <button id="btn-theme-mobile" class="cursor-pointer transition hover:scale-110 duration-200">
-                <img src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-6 h-6 object-contain" loading="lazy">
+                <img data-icon="theme"  src="{{ asset('../images/icons/moon.svg') }}" alt="Сменить тему" class="w-6 h-6 object-contain" loading="lazy">
             </button>
             <button id="accessible-reset-mobile" class="cursor-pointer text-xs text-base-content/40 hover:text-error transition">
                 Сбросить
             </button>
             <a href="{{route('profile')}}" class="cursor-pointer transition hover:scale-110 duration-200">
-                <img src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-6 h-6 object-contain" loading="lazy">
+                <img data-icon="profile"  src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-6 h-6 object-contain" loading="lazy">
             </a>
         </div>
 

@@ -8,7 +8,7 @@
 
         <div class="flex justify-center mb-6">
             <div class="w-[220px]">
-                <img src="{{ asset('../images/illustration/illustration_2.webp') }}" alt="иллюстрация2" class="w-full object-contain" loading="lazy">
+                <img  src="{{ asset('../images/illustration/illustration_2.webp') }}" alt="иллюстрация2" class="w-full object-contain" loading="lazy">
             </div>
         </div>
 

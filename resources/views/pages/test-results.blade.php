@@ -3,12 +3,6 @@
 @section('content')
 
     <div class="max-w-3xl mx-auto px-6 py-10 flex flex-col gap-8">
-
-
-
-        ГПТ ВАРИАНТ
-
-        {{-- Итоговая оценка --}}
         <div class="card border border-base-200 p-8 flex flex-col items-center gap-4">
             <h1 class="text-2xl font-bold">Результаты тестирования</h1>
 
@@ -35,11 +29,9 @@
             </div>
         </div>
 
-        {{-- Разбор вопросов --}}
         <div class="flex flex-col gap-4">
             <h2 class="text-xl font-semibold">Разбор вопросов</h2>
 
-            {{-- Правильный ответ --}}
             <div class="card border border-green-200 bg-green-50/50 p-6 flex flex-col gap-4">
                 <div class="flex items-center justify-between">
                     <span class="text-sm text-base-content/50">Вопрос 1</span>
@@ -54,7 +46,6 @@
                 </div>
             </div>
 
-            {{-- Неправильный ответ --}}
             <div class="card border border-red-200 bg-red-50/50 p-6 flex flex-col gap-4">
                 <div class="flex items-center justify-between">
                     <span class="text-sm text-base-content/50">Вопрос 2</span>

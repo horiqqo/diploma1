@@ -1,0 +1,20 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Role;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class RoleSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        Role::create(['name' => 'admin', 'display_name' => 'Администратор']);
+        Role::create(['name' => 'teacher', 'display_name' => 'Учитель']);
+        Role::create(['name' => 'student', 'display_name' => 'Ученик']);
+    }
+}
