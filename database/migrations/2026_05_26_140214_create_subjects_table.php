@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('icon')->nullable();
             $table->text('description')->nullable();
-            $table->integer('class_number');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

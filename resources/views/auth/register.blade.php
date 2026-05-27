@@ -13,6 +13,29 @@
                 <x-auth-input label="ФИО" name="name" placeholder="Введите ФИО"/>
                 <x-auth-input label="Почта" name="email" type="email" placeholder="Введите почту"/>
                 <x-auth-input label="Пароль" name="password" type="password" placeholder="Введите пароль"/>
+                <x-auth-input label="Подтвердите пароль" name="password_confirmation" type="password" placeholder="Повторите пароль"/>
+                <x-auth-input label="Дата рождения" name="birthday" type="date"/>
+
+                <div class="flex gap-3">
+                    <div class="flex-1">
+                        <label class="label">Номер класса</label>
+                        <select name="class_number" class="select select-bordered w-full">
+                            <option value="">Выберите класс</option>
+                            @foreach(range(1, 11) as $n)
+                                <option value="{{ $n }}" {{ old('class_number') == $n ? 'selected' : '' }}>{{ $n }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label class="label">Буква класса</label>
+                        <select name="class_letter" class="select select-bordered w-full">
+                            <option value="">Выберите букву</option>
+                            @foreach(['А','Б','В','Г','Д'] as $l)
+                                <option value="{{ $l }}" {{ old('class_letter') == $l ? 'selected' : '' }}>{{ $l }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <x-auth-checkbox name="agree"> Я согласен на
                     <a href="#" class="text-primary hover:underline">обработку персональных данных</a>
                 </x-auth-checkbox>

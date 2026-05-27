@@ -18,16 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->nullable();
-
             $table->date('birthday')->nullable();
-            $table->integer('class_number')->nullable();
-            $table->string('class_letter', 10)->nullable();
-
-
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

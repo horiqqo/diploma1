@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('answers', function (Blueprint $table) {
-            $table->foreignId('question_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->foreignId('question_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+
         });
     }
 
