@@ -18,7 +18,7 @@ class TestFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => 'Тест: ' . fake()->sentence(3),
+            //
         ];
     }
 }

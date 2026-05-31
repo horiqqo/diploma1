@@ -26,8 +26,10 @@
 
         <div class="flex md:hidden flex-col gap-6">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-base-200 shrink-0 rounded"></div>
-                <span class="text-sm text-base-content/70">Система дистанционного обучения МОАУ СОШ №13</span>
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-3">
+                    <img src="{{ asset('../images/icons/logo2.svg') }}" alt="логотип" class="w-16 h-16 object-contain" loading="lazy">
+                    <span class="text-sm text-base-content/70">Система дистанционного обучения МОАУ СОШ №13</span>
+                </a>
             </div>
 
             <div class="grid grid-cols-2 gap-6">

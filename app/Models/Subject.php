@@ -11,8 +11,16 @@ class Subject extends Model
     /** @use HasFactory<\Database\Factories\SubjectFactory> */
     use HasFactory, softDeletes;
 
+    protected $fillable = [
+        'teacher_id',
+        'title',
+        'description'
+    ];
 
-    protected $fillable = ['title', 'icon', 'description', 'class_number', 'is_active'];
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 
     public function themes()
     {

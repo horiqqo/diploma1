@@ -18,10 +18,7 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(4),
-            'content' => fake()->paragraphs(5, true),
-            'image_path' => null,
-            'order_index' => fake()->numberBetween(1, 10),
+            //
         ];
     }
 }

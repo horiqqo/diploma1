@@ -11,7 +11,13 @@ class Theme extends Model
     /** @use HasFactory<\Database\Factories\ThemeFactory> */
     use HasFactory, softDeletes;
 
-    protected $fillable = ['title', 'order_index', 'subject_id'];
+    protected $fillable = [
+        'subject_id',
+        'title',
+        'description',
+        'class_number',
+        'class_letter'
+    ];
 
     public function subject()
     {
@@ -23,8 +29,8 @@ class Theme extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    public function test()
+    public function tests()
     {
-        return $this->hasOne(Test::class);
+        return $this->hasMany(Test::class);
     }
 }

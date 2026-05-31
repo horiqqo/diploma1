@@ -11,10 +11,13 @@ class Answer extends Model
     /** @use HasFactory<\Database\Factories\AnswerFactory> */
     use HasFactory, softDeletes;
 
-    protected $fillable = ['body', 'is_correct', 'question_id'];
+    protected $fillable = [
+        'question_id',
+        'answer',
+        'is_correct'
+    ];
 
     public function question()
     {
         return $this->belongsTo(Question::class);
-    }
-}
+    }}

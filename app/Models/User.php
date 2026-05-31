@@ -5,28 +5,48 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, softDeletes;
-
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
-        'birthday', 'class_number', 'class_letter', 'role_id'
+        'role_id',
+        'name',
+        'email',
+        'password',
+        'birthday',
+        'class_number',
+        'class_letter'
     ];
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
 
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'teacher_id');
+    }
+
     public function testResults()
     {
         return $this->hasMany(TestResult::class);
-    }
-}
+    }}

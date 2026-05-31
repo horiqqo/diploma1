@@ -18,8 +18,7 @@ class ThemeFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(3),
-            'order_index' => fake()->numberBetween(1, 10),
+            //
         ];
     }
 }

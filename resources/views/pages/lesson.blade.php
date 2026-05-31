@@ -4,41 +4,49 @@
 
     <div class="max-w-3xl mx-auto px-6 py-10">
 
-        {{ Breadcrumbs::render('lesson') }}
+        {{ Breadcrumbs::render('lesson', $lesson) }}
 
         <div class="border-b border-base-200 pb-4 mb-8">
-            <h1 class="text-xl font-bold">Тема урока</h1>
+            <h1 class="text-xl font-bold">
+                {{ $lesson->title }}
+            </h1>
         </div>
+
 
         <div class="flex flex-col gap-6">
 
             <p class="text-base-content/80 text-lg leading-relaxed">
-                Текст учебного материала. Здесь будет содержимое урока которое
-                учитель добавит через админ-панель.
+                {{ $lesson->content }}
             </p>
 
-            <div class="flex justify-center">
-                <img src="#" alt="Иллюстрация" class="rounded-xl max-w-full object-contain" loading="lazy">
-            </div>
+            @if($lesson->image)
+                <img src="{{ asset('storage/' . $lesson->image) }}"
+                     alt="{{ $lesson->title }}"
+                     class="rounded-xl w-full object-cover">
+            @endif
 
-            <p class="text-base-content/80 text-lg leading-relaxed">
-                Продолжение учебного материала после картинки.
-            </p>
-
-            <div class="flex items-stretch gap-4 p-5 rounded-xl bg-primary/5">
-                <div class="w-1 bg-primary/40 rounded-full shrink-0"></div>
-                <p class="text-base-content/80 text-lg">
-                    Важная информация которую нужно запомнить.
-                </p>
-            </div>
+            @if($lesson->video)
+                <div class="rounded-xl overflow-hidden">
+                    <iframe
+                        class="w-full aspect-video rounded-xl"
+                        src="{{ $lesson->video }}"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            @endif
 
         </div>
 
-        <div class="mt-10">
-            <a href="{{ route('test') }}" class="btn btn-primary px-10 font-normal text-lg transition-all duration-300 hover:scale-[1.01]">
-                Пройти тест по теме
-            </a>
-        </div>
+        @if($lesson->theme->tests->count())
+            <div class="mt-10">
+
+                <a href="{{ route('test', $lesson->theme->tests->first()->id)}}"
+                   class="btn btn-primary px-10 font-normal text-lg transition-all duration-300 hover:scale-[1.01]">
+                    Пройти тест по теме
+                </a>
+
+            </div>
+        @endif
 
     </div>
 

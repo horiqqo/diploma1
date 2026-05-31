@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lesson;
+use App\Models\Question;
+use App\Models\Subject;
+use App\Models\Test;
+use App\Models\Theme;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -10,32 +16,9 @@ class PageController extends Controller
         return view('pages.home');
     }
 
-    public function showThemesPage(){
-        return view('pages.themes');
-    }
-
-    public function showSubjectsPage(){
-        return view('pages.subjects');
-    }
-
-    public function showProfilePage(){
-        return view('pages.profile');
-    }
-
-    public function showLessonPage(){
-        return view('pages.lesson');
-    }
-
-    public function showTestsPage()
-    {
-        return view('pages.test');
-    }
-
    public function showTestResultsPage(){
         return view('pages.test-results');
    }
-
-
 
     public function showRegisterPage(){
         return view('auth.register');
@@ -45,21 +28,17 @@ class PageController extends Controller
         return view('auth.login');
     }
 
-
-
-
-
     public function showDashboardPage(){
-        return view('pages.admin.dashboard');
-    }
 
-    public function showAdminSubjectsPage()
-    {
-        return view('pages.admin.admin-subjects');
-    }
+        $stats = [
+            'subjects' => Subject::count(),
+            'tests' => Test::count(),
+            'users' => User::count(),
+            'themes' => Theme::count(),
+            'lessons' => Lesson::count(),
+            'questions' => Question::count(),
+        ];
 
-    public function showAdminUsersListPage()
-    {
-        return view('pages.admin.users-list');
+        return view('pages.admin.dashboard', compact('stats'));
     }
 }

@@ -18,14 +18,7 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->randomElement([
-                'Математика', 'Физика', 'Химия', 'Биология',
-                'История', 'География', 'Информатика', 'Литература'
-            ]),
-            'icon' => null,
-            'description' => fake()->sentence(),
-            'class_number' => fake()->numberBetween(5, 11),
-            'is_active' => true,
+            //
         ];
     }
 }

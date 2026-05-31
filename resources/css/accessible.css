@@ -16,6 +16,18 @@ html.accessible-scheme-yellow [class*="bg-base"] {
     border-color: #000 !important;
 }
 
+html.accessible-1 {
+    font-size: 110% !important;
+}
+
+html.accessible-2 {
+    font-size: 125% !important;
+}
+
+html.accessible-3 {
+    font-size: 150% !important;
+}
+
 html.accessible-scheme-yellow *:not(button):not(.btn):not(.btn *) {
     color: #000 !important;
 }

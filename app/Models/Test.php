@@ -11,7 +11,10 @@ class Test extends Model
     /** @use HasFactory<\Database\Factories\TestFactory> */
     use HasFactory, softDeletes;
 
-    protected $fillable = ['title', 'theme_id'];
+    protected $fillable = [
+        'theme_id',
+        'title'
+    ];
 
     public function theme()
     {
@@ -23,8 +26,7 @@ class Test extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function results()
+    public function testResults()
     {
         return $this->hasMany(TestResult::class);
-    }
-}
+    }}

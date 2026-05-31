@@ -9,15 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
     /** @use HasFactory<\Database\Factories\RoleFactory> */
-    use HasFactory;
+    use HasFactory, softDeletes;
 
-    protected $fillable = ['name', 'display_name'];
+    protected $fillable = [
+        'title'
+    ];
 
     public function users()
     {
         return $this->hasMany(User::class);
     }
-
 }
-
-

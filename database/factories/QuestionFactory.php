@@ -18,9 +18,7 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'body' => fake()->sentence(6) . '?',
-            'type' => 'single',
-            'order_index' => fake()->numberBetween(1, 10),
+            //
         ];
     }
 }

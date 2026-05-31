@@ -7,18 +7,27 @@
         <div class="card border border-base-200 p-6 flex flex-col gap-4">
 
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-base-200 shrink-0"></div>
-                    <span class="text-lg font-medium">Фамилия Имя Отчество</span>
+                <div class="flex flex-col">
+                    <span class="text-lg font-medium">
+                        {{ $user->name }}
+                    </span>
+                    <span class="text-sm text-base-content/50 flex">
+                        <p>Почта: </p> {{ $user->email }}
+                    </span>
+                    <span class="text-sm text-base-content/30 flex">
+                         <p>Класс: </p>  {{ $user->class_number }}{{ $user->class_letter }}
+                    </span>
                 </div>
-                <a href="#" class="btn btn-primary font-normal">Редактировать</a>
+                <a href="{{route('profile.edit')}}" class="btn btn-primary font-normal">Редактировать</a>
             </div>
 
             <div class="border-t border-base-200"></div>
 
             <p class="text-center text-lg">
                 Общий средний балл по всем предметам:
-                <span class="text-primary font-semibold">4.33</span>
+                <span class="text-primary font-semibold">
+                    {{ $averageScore }}
+                </span>
             </p>
 
         </div>
@@ -36,8 +45,32 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tbody>
+
+                    @forelse($results as $result)
+                        <tr class="border-b border-base-200">
+                            <td class="p-4">
+                                {{ $result->test->theme->subject->title }}
+                            </td>
+                            <td class="p-4 text-center">
+                                {{ $result->test->theme->title }}
+                            </td>
+                            <td class="p-4 text-right">
+                                <x-grade :score="$result->score" />
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="p-6 text-center text-base-content/50">
+                                Вы ещё не проходили тесты
+                            </td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
+                <div class="mt-4">
+                    {{ $results->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -11,9 +11,11 @@ class TestResult extends Model
     /** @use HasFactory<\Database\Factories\TestResultFactory> */
     use HasFactory, softDeletes;
 
-    protected $fillable = ['score', 'total', 'completed_at', 'user_id', 'test_id'];
-
-    protected $casts = ['completed_at' => 'datetime'];
+    protected $fillable = [
+        'user_id',
+        'test_id',
+        'score'
+    ];
 
     public function user()
     {
@@ -23,5 +25,4 @@ class TestResult extends Model
     public function test()
     {
         return $this->belongsTo(Test::class);
-    }
-}
+    }}

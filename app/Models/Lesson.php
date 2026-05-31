@@ -11,10 +11,15 @@ class Lesson extends Model
     /** @use HasFactory<\Database\Factories\LessonFactory> */
     use HasFactory, softDeletes;
 
-    protected $fillable = ['title', 'content', 'image_path', 'order_index', 'theme_id'];
+    protected $fillable = [
+        'theme_id',
+        'title',
+        'content',
+        'image',
+        'video'
+    ];
 
     public function theme()
     {
         return $this->belongsTo(Theme::class);
-    }
-}
+    }}

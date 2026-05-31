@@ -11,8 +11,11 @@ class Question extends Model
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory, softDeletes;
 
-
-    protected $fillable = ['body', 'type', 'order_index', 'test_id'];
+    protected $fillable = [
+        'test_id',
+        'question',
+        'image'
+    ];
 
     public function test()
     {
@@ -22,5 +25,4 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
-    }
-}
+    }}

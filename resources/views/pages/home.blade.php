@@ -56,7 +56,7 @@
 
         <section class="py-6 px-4">
             <div class="flex justify-center md:hidden mb-4">
-                <img loading="lazy" src="{{asset('../images/gifs/books-main.gif')}}" class="w-[200px]">
+                <img loading="lazy"  src="{{asset('../images/gifs/books-main.gif')}}" class="w-[200px] rounded-3xl">
             </div>
 
             <div class="flex items-center gap-10">

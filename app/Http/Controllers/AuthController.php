@@ -16,14 +16,14 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
+        $validated = $request->validate([
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials, true)) {
+        if (Auth::attempt($validated, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('home'));
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
@@ -39,21 +39,19 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-            'birthday' => 'nullable|date',
+            'name'         => 'required|string|min:2|max:255',
+            'email'        => 'required|email|unique:users,email',
+            'password'     => 'required|min:6|confirmed',
+            'birthday'     => 'nullable|date|before:today',
+            'class_number' => 'nullable|integer|min:1|max:11',
+            'class_letter' => 'nullable|string|max:1',
             'agree' => 'accepted',
-            'class_number' => 'required|nullable|integer|between:1,11',
-            'class_letter' => 'required|nullable|string|max:10',
-
         ]);
 
-        $user = User::create([
-            ...$validated,
-            'password' => bcrypt($validated['password']),
-            'role_id' => Role::where('name', 'student')->first()->id,
-        ]);
+        $studentRole = Role::where('title', 'student')->first();
+        $validated['role_id'] = $studentRole?->id;
+
+        $user = User::create($validated);
 
         Auth::login($user, true);
 
