@@ -6,24 +6,23 @@
 
     <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col gap-6">
 
+        {{ Breadcrumbs::render('admin-questions', $test) }}
+
         <div class="flex items-center justify-between">
 
             <h1 class="text-2xl font-bold">
                 Вопросы теста: {{ $test->title }}
             </h1>
 
-            <a href="{{ route('admin-questions-create', $test->id) }}"
-               class="btn btn-primary">
-
+            <a href="{{ route('admin-questions-create', $test->id) }}" class="btn btn-primary">
                 Добавить вопрос
-
             </a>
 
         </div>
 
         <div class="overflow-x-auto">
 
-            <table class="table w-full border border-base-200">
+            <table class="table table-fixed w-full border border-base-200">
 
                 <thead>
 
@@ -52,11 +51,13 @@
                             <a href="{{ route('admin-questions-edit', $question->id) }}"
                                class="btn btn-sm btn-outline">Изменить</a>
 
-                            <form method="POST" action="{{ route('admin-questions-delete', $question->id) }}">
+                            <form method="POST" action="{{ route('admin-questions-delete', $question->id) }}" id="delete-question-{{ $question->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-error btn-outline"
-                                        onclick="return confirm('Удалить вопрос?')">Удалить</button>
+                                <button type="button" class="btn btn-sm btn-error btn-outline"
+                                        onclick="confirmDelete('delete-question-{{ $question->id }}', 'Вы уверены, что хотите удалить этот вопрос?')">
+                                    Удалить
+                                </button>
                             </form>
                         </td>
 

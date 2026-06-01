@@ -1,5 +1,5 @@
-@extends('errors::minimal')
+@extends('errors.layout')
 
-@section('title', __('Forbidden'))
+@section('title', 'Доступ запрещён')
 @section('code', '403')
-@section('message', __($exception->getMessage() ?: 'Forbidden'))
+@section('message', 'У вас недостаточно прав для просмотра данного раздела.')

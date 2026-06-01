@@ -30,7 +30,7 @@
 
         <x-filters :action="route('admin-lessons')">
             <select name="subject_id" class="select select-bordered font-normal">
-                <option value="">Все предметы</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все предметы</option>
                 @foreach($subjects as $subject)
                     <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>
                         {{ $subject->title }}
@@ -40,7 +40,7 @@
 
             @if($themes->count())
                 <select name="theme_id" class="select select-bordered font-normal">
-                    <option value="">Все темы</option>
+                    <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все темы</option>
                     @foreach($themes as $theme)
                         <option value="{{ $theme->id }}" {{ request('theme_id') == $theme->id ? 'selected' : '' }}>
                             {{ $theme->title }}
@@ -50,7 +50,7 @@
             @endif
 
             <select name="sort" class="select select-bordered font-normal">
-                <option value="">Сортировка</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Сортировка</option>
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>А → Я</option>
                 <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Я → А</option>
             </select>
@@ -58,7 +58,7 @@
 
         <div class="overflow-x-auto">
 
-            <table class="table w-full border border-base-200">
+            <table class="table table-fixed w-full border border-base-200">
 
                 <thead>
 
@@ -66,6 +66,7 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Тема</th>
+                    <th>Предмет</th>
                     <th>Действия</th>
 
                 </tr>
@@ -83,16 +84,18 @@
                         <td>{{ $lesson->title }}</td>
 
                         <td>{{ $lesson->theme->title }}</td>
+                        <td>{{ $lesson->theme->subject->title ?? '—' }}</td>
 
                         <td class="flex items-center gap-2">
                             <a href="{{ route('admin-lessons-edit', $lesson->id) }}"
                                class="btn btn-sm btn-outline">Изменить</a>
 
-                            <form method="POST" action="{{ route('admin-lessons-delete', $lesson->id) }}">
-                                @csrf
+                            <form method="POST" action="{{ route('admin-lessons-delete', $lesson->id) }}" id="delete-lesson-{{ $lesson->id }}">                                @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-error btn-outline"
-                                        onclick="return confirm('Удалить урок?')">Удалить</button>
+                                <button type="button" class="btn btn-sm btn-error btn-outline"
+                                        onclick="confirmDelete('delete-lesson-{{ $lesson->id }}', 'Вы уверены, что хотите удалить этот урок?')">
+                                    Удалить
+                                </button>
                             </form>
                         </td>
 

@@ -49,4 +49,16 @@ class User extends Authenticatable
     public function testResults()
     {
         return $this->hasMany(TestResult::class);
-    }}
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role->title === 'admin';
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->role->title === 'teacher';
+    }
+
+}

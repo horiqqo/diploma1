@@ -36,7 +36,7 @@
             <h2 class="text-xl font-semibold text-center">Таблица оценок за тестированию</h2>
 
             <div class="overflow-x-auto">
-                <table class="table border border-base-200 rounded-xl w-full min-w-[500px]">
+                <table class="table table-fixed border border-base-200 rounded-xl w-full min-w-[500px]">
                     <thead>
                     <tr class="border-b border-base-200">
                         <th class="p-4 text-left font-medium">Предмет</th>

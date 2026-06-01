@@ -14,6 +14,12 @@ class LessonController extends Controller
     {
         $query = Lesson::with('theme.subject');
 
+        $user = auth()->user();
+        if ($user->isTeacher()) {
+            $subjectIds = $user->subjects()->pluck('id');
+            $query->whereHas('theme', fn($q) => $q->whereIn('subject_id', $subjectIds));
+        }
+
         if ($request->filled('subject_id')) {
             $query->whereHas('theme', fn($q) => $q->where('subject_id', $request->subject_id));
         }
@@ -45,7 +51,8 @@ class LessonController extends Controller
 
     public function create(Request $request)
     {
-        $subjects = Subject::all();
+        $user = auth()->user();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
 
         $themes = collect();
         $selectedSubject = null;
@@ -65,19 +72,34 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'theme_id' => 'required|exists:themes,id',
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|string',
-            'video' => 'nullable|string',
+            'theme_id' => 'required|integer|exists:themes,id',
+            'title'    => 'required|string|min:2|max:255',
+            'content'  => 'required|string|min:10',
+            'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'video'    => 'nullable|url|max:500',
+        ], [
+            'theme_id.required' => 'Выберите тему',
+            'theme_id.exists'   => 'Выбранная тема не найдена',
+            'title.required'    => 'Название урока обязательно',
+            'title.min'         => 'Название должно содержать минимум 2 символа',
+            'title.max'         => 'Название не должно превышать 255 символов',
+            'content.required'  => 'Содержимое урока обязательно',
+            'content.min'       => 'Содержимое должно содержать минимум 10 символов',
+            'image.image'       => 'Файл должен быть изображением',
+            'image.mimes'       => 'Допустимые форматы: JPG, PNG, WEBP',
+            'image.max'         => 'Размер изображения не должен превышать 2 МБ',
+            'video.url'         => 'Введите корректную ссылку на видео',
+            'video.max'         => 'Ссылка не должна превышать 500 символов',
         ]);
 
         Lesson::create([
             'theme_id' => $request->theme_id,
-            'title' => $request->title,
-            'content' => $request->content,
-            'image' => $request->image,
-            'video' => $request->video,
+            'title'    => $request->title,
+            'content'  => $request->content,
+            'image'    => $request->hasFile('image')
+                ? $request->file('image')->store('lessons', 'public')
+                : null,
+            'video'    => $request->video,
         ]);
 
         return redirect()->route('admin-lessons')
@@ -86,7 +108,9 @@ class LessonController extends Controller
 
     public function edit(Lesson $lesson)
     {
-        $subjects = Subject::all();
+        $this->authorizeLesson($lesson);
+        $user = auth()->user();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
         $selectedSubject = $lesson->theme->subject;
         $themes = $selectedSubject->themes;
         return view('pages.admin.form.lesson-edit', compact('lesson', 'subjects', 'themes', 'selectedSubject'));
@@ -94,12 +118,26 @@ class LessonController extends Controller
 
     public function update(Request $request, Lesson $lesson)
     {
+        $this->authorizeLesson($lesson);
         $request->validate([
-            'theme_id' => 'required|exists:themes,id',
-            'title'    => 'required|string|max:255',
-            'content'  => 'required|string',
-            'image'    => 'nullable|image|max:2048',
-            'video'    => 'nullable|string',
+            'theme_id' => 'required|integer|exists:themes,id',
+            'title'    => 'required|string|min:2|max:255',
+            'content'  => 'required|string|min:10',
+            'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'video'    => 'nullable|url|max:500',
+        ], [
+            'theme_id.required' => 'Выберите тему',
+            'theme_id.exists'   => 'Выбранная тема не найдена',
+            'title.required'    => 'Название урока обязательно',
+            'title.min'         => 'Название должно содержать минимум 2 символа',
+            'title.max'         => 'Название не должно превышать 255 символов',
+            'content.required'  => 'Содержимое урока обязательно',
+            'content.min'       => 'Содержимое должно содержать минимум 10 символов',
+            'image.image'       => 'Файл должен быть изображением',
+            'image.mimes'       => 'Допустимые форматы: JPG, PNG, WEBP',
+            'image.max'         => 'Размер изображения не должен превышать 2 МБ',
+            'video.url'         => 'Введите корректную ссылку на видео',
+            'video.max'         => 'Ссылка не должна превышать 500 символов',
         ]);
 
         $imagePath = $lesson->image;
@@ -124,11 +162,24 @@ class LessonController extends Controller
 
     public function destroy(Lesson $lesson)
     {
+        $this->authorizeLesson($lesson);
         if ($lesson->image) {
             Storage::disk('public')->delete($lesson->image);
         }
         $lesson->delete();
         return redirect()->route('admin-lessons')->with('success', 'Урок удалён');
+    }
+
+
+    private function authorizeLesson(Lesson $lesson): void
+    {
+        $user = auth()->user();
+        if ($user->isTeacher()) {
+            $subjectIds = $user->subjects()->pluck('id');
+            if (!$subjectIds->contains($lesson->theme->subject_id)) {
+                abort(403);
+            }
+        }
     }
 }
 

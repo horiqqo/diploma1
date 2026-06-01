@@ -14,68 +14,32 @@
             <h1 class="text-2xl font-bold">Редактирование профиля</h1>
 
             @if(session('success'))
-                <div class="alert alert-success text-sm">
-                    {{ session('success') }}
-                </div>
+                <div class="alert alert-success text-sm">{{ session('success') }}</div>
             @endif
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">ФИО</label>
-                <input type="text"
-                       name="name"
-                       value="{{ old('name', $user->name) }}"
-                       class="input input-bordered w-full">
-                @error('name')
-                <span class="text-error text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+            <x-form-field label="ФИО" :error="$errors->first('name')">
+                <input type="text" name="name" value="{{ old('name', $user->name) }}" class="input input-bordered w-full">
+            </x-form-field>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Email</label>
-                <input type="email"
-                       name="email"
-                       value="{{ old('email', $user->email) }}"
-                       class="input input-bordered w-full">
-                @error('email')
-                <span class="text-error text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+            <x-form-field label="Email" :error="$errors->first('email')">
+                <input type="email" name="email" value="{{ old('email', $user->email) }}" class="input input-bordered w-full">
+            </x-form-field>
 
             <div class="border-t border-base-200 pt-4 flex flex-col gap-4">
-            <span class="font-medium text-base-content/60 text-sm">
-                Оставьте пустым, если не хотите менять пароль
-            </span>
-
-                <div class="flex flex-col gap-2">
-                    <label class="font-medium">Новый пароль</label>
-                    <input type="password"
-                           name="password"
-                           class="input input-bordered w-full">
-                    @error('password')
-                    <span class="text-error text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="font-medium">Подтверждение пароля</label>
-                    <input type="password"
-                           name="password_confirmation"
-                           class="input input-bordered w-full">
-                </div>
+                <span class="font-medium text-base-content/60 text-sm">Оставьте пустым, если не хотите менять пароль</span>
+                <x-form-field label="Новый пароль" :error="$errors->first('password')">
+                    <input type="password" name="password" class="input input-bordered w-full">
+                </x-form-field>
+                <x-form-field label="Подтверждение пароля">
+                    <input type="password" name="password_confirmation" class="input input-bordered w-full">
+                </x-form-field>
             </div>
 
             <div class="flex items-center gap-4 pt-2">
-                <button class="btn btn-primary px-8 font-normal">
-                    Сохранить
-                </button>
-                <a href="{{ route('dashboard') }}"
-                   class="btn bg-base-100 border border-base-300 font-normal">
-                    Отмена
-                </a>
+                <button class="btn btn-primary px-8 font-normal">Сохранить</button>
+                <a href="{{ route('dashboard') }}" class="btn bg-base-100 border border-base-300 font-normal">Отмена</a>
             </div>
 
         </form>
-
     </div>
-
 @endsection

@@ -32,14 +32,23 @@ class QuestionController extends Controller
     public function store(Request $request, Test $test)
     {
         $request->validate([
-            'question' => 'required|string',
-            'image' => 'nullable|string',
+            'question' => 'required|string|min:5|max:1000',
+            'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'question.required' => 'Текст вопроса обязателен',
+            'question.min'      => 'Вопрос должен содержать минимум 5 символов',
+            'question.max'      => 'Вопрос не должен превышать 1000 символов',
+            'image.image'       => 'Файл должен быть изображением',
+            'image.mimes'       => 'Допустимые форматы: JPG, PNG, WEBP',
+            'image.max'         => 'Размер изображения не должен превышать 2 МБ',
         ]);
 
         Question::create([
-            'test_id' => $test->id,
+            'test_id'  => $test->id,
             'question' => $request->question,
-            'image' => $request->image,
+            'image'    => $request->hasFile('image')
+                ? $request->file('image')->store('questions', 'public')
+                : null,
         ]);
 
         return redirect()
@@ -54,7 +63,11 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $request->validate([
-            'question' => 'required|string|max:255',
+            'question' => 'required|string|min:5|max:1000',
+        ], [
+            'question.required' => 'Текст вопроса обязателен',
+            'question.min'      => 'Вопрос должен содержать минимум 5 символов',
+            'question.max'      => 'Вопрос не должен превышать 1000 символов',
         ]);
 
         $question->update(['question' => $request->question]);

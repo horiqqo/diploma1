@@ -12,32 +12,26 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $results = TestResult::with(['test.theme.subject'])->where('user_id', $user->id)->paginate(10);
+        $results = TestResult::with(['test.theme.subject'])
+            ->where('user_id', $user->id)
+            ->whereHas('test.theme.subject')
+            ->paginate(10);
+
+        $allScores = TestResult::where('user_id', $user->id)
+            ->whereHas('test.theme.subject')
+            ->pluck('score');
 
         $averageScore = 0;
 
-        if ($results->count()) {
-            $grades = [];
+        if ($allScores->isNotEmpty()) {
+            $grades = $allScores->map(function ($score) {
+                if ($score >= 90) return 5;
+                if ($score >= 75) return 4;
+                if ($score >= 50) return 3;
+                return 2;
+            });
 
-            foreach ($results as $result) {
-
-                if ($result->score >= 90) {
-                    $grades[] = 5;
-                }
-                elseif ($result->score >= 75) {
-                    $grades[] = 4;
-                }
-                elseif ($result->score >= 50) {
-                    $grades[] = 3;
-                }
-                else {
-                    $grades[] = 2;
-                }
-            }
-
-            $averageScore = count($grades)
-                ? round(array_sum($grades) / count($grades), 2)
-                : 0;
+            $averageScore = round($grades->average(), 2);
         }
 
         return view('pages.profile', compact(
@@ -61,9 +55,20 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:6|confirmed',
+            'name'                  => 'required|string|min:2|max:255',
+            'email'                 => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password'              => 'nullable|string|min:6|max:255|confirmed',
+            'password_confirmation' => 'nullable|string',
+        ], [
+            'name.required'      => 'Имя обязательно для заполнения',
+            'name.min'           => 'Имя должно содержать минимум 2 символа',
+            'name.max'           => 'Имя не должно превышать 255 символов',
+            'email.required'     => 'Email обязателен для заполнения',
+            'email.email'        => 'Введите корректный email',
+            'email.unique'       => 'Пользователь с таким email уже существует',
+            'password.min'       => 'Пароль должен содержать минимум 6 символов',
+            'password.max'       => 'Пароль не должен превышать 255 символов',
+            'password.confirmed' => 'Пароли не совпадают',
         ]);
 
         $data = [

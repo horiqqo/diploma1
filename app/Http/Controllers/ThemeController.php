@@ -10,22 +10,25 @@ class ThemeController extends Controller
 {
     public function showThemesListPage(Request $request)
     {
+        $user = auth()->user();
         $query = Theme::with('subject');
 
-        if ($request->filled('subject_id')) {
+        if ($user->isTeacher()) {
+            $subjectIds = $user->subjects()->pluck('id');
+            $query->whereIn('subject_id', $subjectIds);
+        } elseif ($request->filled('subject_id')) {
             $query->where('subject_id', $request->subject_id);
         }
 
         if ($request->filled('class_number')) {
             $query->where('class_number', $request->class_number);
         }
-
         if ($request->filled('sort')) {
             $query->orderBy('title', $request->sort);
         }
 
         $themes = $query->paginate(15)->withQueryString();
-        $subjects = Subject::all();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
 
         return view('pages.admin.themes-list', compact('themes', 'subjects'));
     }
@@ -48,7 +51,8 @@ class ThemeController extends Controller
 
     public function create()
     {
-        $subjects = Subject::all();
+        $user = auth()->user();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
 
         return view('pages.admin.form.theme-create', compact('subjects'));
     }
@@ -56,11 +60,25 @@ class ThemeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'subject_id' => 'required|exists:subjects,id',
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'class_number' => 'required|integer',
-            'class_letter' => 'required|string|max:10',
+            'subject_id'   => 'required|integer|exists:subjects,id',
+            'title'        => 'required|string|min:2|max:255',
+            'description'  => 'nullable|string|max:2000',
+            'class_number' => 'required|integer|min:1|max:11',
+            'class_letter' => 'required|string|size:1|alpha',
+        ], [
+            'subject_id.required'   => 'Выберите предмет',
+            'subject_id.exists'     => 'Выбранный предмет не найден',
+            'title.required'        => 'Название темы обязательно',
+            'title.min'             => 'Название должно содержать минимум 2 символа',
+            'title.max'             => 'Название не должно превышать 255 символов',
+            'description.max'       => 'Описание не должно превышать 2000 символов',
+            'class_number.required' => 'Номер класса обязателен',
+            'class_number.integer'  => 'Номер класса должен быть числом',
+            'class_number.min'      => 'Номер класса не может быть меньше 1',
+            'class_number.max'      => 'Номер класса не может быть больше 11',
+            'class_letter.required' => 'Буква класса обязательна',
+            'class_letter.size'     => 'Буква класса должна быть одним символом',
+            'class_letter.alpha'    => 'Буква класса должна быть буквой',
         ]);
 
         Theme::create([
@@ -79,18 +97,38 @@ class ThemeController extends Controller
 
     public function edit(Theme $theme)
     {
-        $subjects = Subject::all();
+        $this->authorizeTheme($theme);
+
+        $user = auth()->user();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
+
         return view('pages.admin.form.theme-edit', compact('theme', 'subjects'));
     }
 
     public function update(Request $request, Theme $theme)
     {
+
+        $this->authorizeTheme($theme);
         $request->validate([
-            'subject_id'   => 'required|exists:subjects,id',
-            'title'        => 'required|string|max:255',
-            'description'  => 'nullable|string',
+            'subject_id'   => 'required|integer|exists:subjects,id',
+            'title'        => 'required|string|min:2|max:255',
+            'description'  => 'nullable|string|max:2000',
             'class_number' => 'required|integer|min:1|max:11',
-            'class_letter' => 'required|string|max:2',
+            'class_letter' => 'required|string|size:1|alpha',
+        ], [
+            'subject_id.required'   => 'Выберите предмет',
+            'subject_id.exists'     => 'Выбранный предмет не найден',
+            'title.required'        => 'Название темы обязательно',
+            'title.min'             => 'Название должно содержать минимум 2 символа',
+            'title.max'             => 'Название не должно превышать 255 символов',
+            'description.max'       => 'Описание не должно превышать 2000 символов',
+            'class_number.required' => 'Номер класса обязателен',
+            'class_number.integer'  => 'Номер класса должен быть числом',
+            'class_number.min'      => 'Номер класса не может быть меньше 1',
+            'class_number.max'      => 'Номер класса не может быть больше 11',
+            'class_letter.required' => 'Буква класса обязательна',
+            'class_letter.size'     => 'Буква класса должна быть одним символом',
+            'class_letter.alpha'    => 'Буква класса должна быть буквой',
         ]);
 
         $theme->update($request->only([
@@ -102,7 +140,17 @@ class ThemeController extends Controller
 
     public function destroy(Theme $theme)
     {
+        $this->authorizeTheme($theme);
         $theme->delete();
         return redirect()->route('admin-themes')->with('success', 'Тема удалена');
+    }
+
+
+    private function authorizeTheme(Theme $theme): void
+    {
+        $user = auth()->user();
+        if ($user->isTeacher() && !$user->subjects()->where('id', $theme->subject_id)->exists()) {
+            abort(403);
+        }
     }
 }

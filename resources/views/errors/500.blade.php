@@ -1,5 +1,5 @@
-@extends('errors::minimal')
+@extends('errors.layout')
 
-@section('title', __('Server Error'))
+@section('title', 'Ошибка сервера')
 @section('code', '500')
-@section('message', __('Server Error'))
+@section('message', 'Во время обработки запроса произошла внутренняя ошибка сервера.')

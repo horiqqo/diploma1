@@ -68,6 +68,12 @@ class TestController extends Controller
     {
         $query = Test::with('theme.subject');
 
+        $user = auth()->user();
+        if ($user->isTeacher()) {
+            $subjectIds = $user->subjects()->pluck('id');
+            $query->whereHas('theme', fn($q) => $q->whereIn('subject_id', $subjectIds));
+        }
+
         if ($request->filled('subject_id')) {
             $query->whereHas('theme', fn($q) => $q->where('subject_id', $request->subject_id));
         }
@@ -91,7 +97,8 @@ class TestController extends Controller
 
     public function create(Request $request)
     {
-        $subjects = Subject::all();
+        $user = auth()->user();
+        $subjects = $user->isTeacher() ? $user->subjects : Subject::all();
 
         $themes = collect();
         $selectedSubject = null;
@@ -111,8 +118,14 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'theme_id' => 'required|exists:themes,id',
-            'title' => 'required|string|max:255',
+            'theme_id' => 'required|integer|exists:themes,id',
+            'title'    => 'required|string|min:2|max:255',
+        ], [
+            'theme_id.required' => 'Выберите тему',
+            'theme_id.exists'   => 'Выбранная тема не найдена',
+            'title.required'    => 'Название теста обязательно',
+            'title.min'         => 'Название должно содержать минимум 2 символа',
+            'title.max'         => 'Название не должно превышать 255 символов',
         ]);
 
         Test::create([
@@ -127,6 +140,7 @@ class TestController extends Controller
 
     public function edit(Test $test)
     {
+        $this->authorizeTest($test);
         $subjects = Subject::all();
         $selectedSubject = $test->theme->subject;
         $themes = $selectedSubject->themes;
@@ -135,9 +149,16 @@ class TestController extends Controller
 
     public function update(Request $request, Test $test)
     {
+        $this->authorizeTest($test);
         $request->validate([
-            'theme_id' => 'required|exists:themes,id',
-            'title'    => 'required|string|max:255',
+            'theme_id' => 'required|integer|exists:themes,id',
+            'title'    => 'required|string|min:2|max:255',
+        ], [
+            'theme_id.required' => 'Выберите тему',
+            'theme_id.exists'   => 'Выбранная тема не найдена',
+            'title.required'    => 'Название теста обязательно',
+            'title.min'         => 'Название должно содержать минимум 2 символа',
+            'title.max'         => 'Название не должно превышать 255 символов',
         ]);
 
         $test->update($request->only(['theme_id', 'title']));
@@ -147,7 +168,19 @@ class TestController extends Controller
 
     public function destroy(Test $test)
     {
+        $this->authorizeTest($test);
         $test->delete();
         return redirect()->route('admin-tests')->with('success', 'Тест удалён');
+    }
+
+    private function authorizeTest(Test $test): void
+    {
+        $user = auth()->user();
+        if ($user->isTeacher()) {
+            $subjectIds = $user->subjects()->pluck('id');
+            if (!$subjectIds->contains($test->theme->subject_id)) {
+                abort(403);
+            }
+        }
     }
 }

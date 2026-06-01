@@ -8,13 +8,13 @@
             {{ Breadcrumbs::render('admin-subjects') }}
         </nav>
 
-            <a href="{{route('admin-subjects-create')}}"  class="btn btn-primary font-normal w-fit">Создать предмет</a>
+        <a href="{{route('admin-subjects-create')}}"  class="btn btn-primary font-normal w-fit">Создать предмет</a>
 
 
 
         <x-filters :action="route('admin-subjects')">
             <select name="teacher_id" class="select select-bordered font-normal">
-                <option value="">Все преподаватели</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все преподаватели</option>
                 @foreach($teachers as $teacher)
                     <option value="{{ $teacher->id }}" {{ request('teacher_id') == $teacher->id ? 'selected' : '' }}>
                         {{ $teacher->name }}
@@ -23,7 +23,7 @@
             </select>
 
             <select name="sort" class="select select-bordered font-normal">
-                <option value="">Сортировка</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Сортировка</option>
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>А → Я</option>
                 <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Я → А</option>
             </select>
@@ -31,7 +31,7 @@
 
 
         <div class="overflow-x-auto">
-            <table class="table w-full border border-base-200">
+            <table class="table table-fixed w-full border border-base-200">
 
                 <thead>
                 <tr>
@@ -60,11 +60,13 @@
                             <a href="{{ route('admin-subjects-edit', $subject->id) }}"
                                class="btn btn-sm btn-outline">Изменить</a>
 
-                            <form method="POST" action="{{ route('admin-subjects-delete', $subject->id) }}">
+                            <form method="POST" action="{{ route('admin-subjects-delete', $subject->id) }}" id="delete-subject-{{ $subject->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-error btn-outline"
-                                        onclick="return confirm('Удалить предмет?')">Удалить</button>
+                                <button type="button" class="btn btn-sm btn-error btn-outline"
+                                        onclick="confirmDelete('delete-subject-{{ $subject->id }}', 'Вы уверены, что хотите удалить этот предмет? Это действие необратимо.')">
+                                    Удалить
+                                </button>
                             </form>
                         </td>
                     </tr>

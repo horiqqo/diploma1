@@ -68,3 +68,48 @@ Breadcrumbs::for('admin-lessons-create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-lessons');
     $trail->push('Создать урок', route('admin-lessons-create'));
 });
+
+Breadcrumbs::for('admin-tests', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Список тестов', route('admin-tests'));
+});
+
+Breadcrumbs::for('admin-tests-create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-tests');
+    $trail->push('Создать тест', route('admin-tests-create'));
+});
+
+Breadcrumbs::for('admin-tests-edit', function (BreadcrumbTrail $trail, $test) {
+    $trail->parent('admin-tests');
+    $trail->push('Редактирование теста', route('admin-tests-edit', $test->id));
+});
+
+Breadcrumbs::for('admin-questions', function (BreadcrumbTrail $trail, $test) {
+    $trail->parent('admin-tests');
+    $trail->push('Вопросы: ' . $test->title, route('admin-questions', $test->id));
+});
+
+Breadcrumbs::for('admin-questions-create', function (BreadcrumbTrail $trail, $test) {
+    $trail->parent('admin-questions', $test);
+    $trail->push('Создать вопрос', route('admin-questions-create', $test->id));
+});
+
+Breadcrumbs::for('admin-questions-edit', function (BreadcrumbTrail $trail, $question) {
+    $trail->parent('admin-questions', $question->test);
+    $trail->push('Редактирование вопроса', route('admin-questions-edit', $question->id));
+});
+
+Breadcrumbs::for('admin-answers', function (BreadcrumbTrail $trail, $question) {
+    $trail->parent('admin-questions', $question->test);
+    $trail->push('Ответы: ' . $question->question, route('admin-answers', $question->id));
+});
+
+Breadcrumbs::for('admin-answers-create', function (BreadcrumbTrail $trail, $question) {
+    $trail->parent('admin-answers', $question);
+    $trail->push('Создать ответ', route('answers.store', $question->id));
+});
+
+Breadcrumbs::for('admin-answers-edit', function (BreadcrumbTrail $trail, $answer) {
+    $trail->parent('admin-answers', $answer->question);
+    $trail->push('Редактирование ответа', route('admin-answers-update', $answer->id));
+});

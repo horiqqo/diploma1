@@ -9,8 +9,7 @@
 
             <h1 class="text-2xl font-bold">Редактирование урока</h1>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Предмет</label>
+            <x-form-field label="Предмет">
                 <select name="subject_id" class="select select-bordered w-full">
                     @foreach($subjects as $subject)
                         <option value="{{ $subject->id }}"
@@ -19,7 +18,7 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </x-form-field>
 
             <button class="btn btn-outline w-full">Сменить предмет</button>
         </form>
@@ -30,8 +29,7 @@
             @csrf
             @method('PUT')
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Тема</label>
+            <x-form-field label="Тема">
                 <select name="theme_id" class="select select-bordered w-full">
                     @foreach($themes as $theme)
                         <option value="{{ $theme->id }}"
@@ -40,38 +38,32 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </x-form-field>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Название</label>
+            <x-form-field label="Название" :error="$errors->first('title')">
                 <input type="text" name="title"
                        value="{{ old('title', $lesson->title) }}"
                        class="input input-bordered w-full">
-            </div>
+            </x-form-field>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Содержание</label>
+            <x-form-field label="Содержание" :error="$errors->first('content')">
                 <textarea name="content" rows="8"
                           class="textarea textarea-bordered w-full">{{ old('content', $lesson->content) }}</textarea>
-            </div>
+            </x-form-field>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Изображение</label>
+            <x-form-field label="Изображение" :error="$errors->first('image')">
                 @if($lesson->image)
-                    <img src="{{ asset('storage/' . $lesson->image) }}"
-                         class="w-32 h-20 object-cover rounded-lg">
+                    <img src="{{ asset('storage/' . $lesson->image) }}" class="w-32 h-20 object-cover rounded-lg">
                 @endif
-                <input type="file" name="image" accept="image/*"
-                       class="file-input file-input-bordered w-full">
+                <input type="file" name="image" accept="image/*" class="file-input file-input-bordered w-full">
                 <span class="text-sm text-base-content/50">Оставьте пустым, чтобы не менять</span>
-            </div>
+            </x-form-field>
 
-            <div class="flex flex-col gap-2">
-                <label class="font-medium">Видео (URL)</label>
+            <x-form-field label="Видео (URL)" :error="$errors->first('video')">
                 <input type="text" name="video"
                        value="{{ old('video', $lesson->video) }}"
                        class="input input-bordered w-full">
-            </div>
+            </x-form-field>
 
             <div class="flex items-center gap-4">
                 <button class="btn btn-primary px-8 font-normal">Сохранить</button>
@@ -80,5 +72,4 @@
             </div>
         </form>
     </div>
-
 @endsection

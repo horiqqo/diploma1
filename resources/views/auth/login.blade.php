@@ -14,8 +14,7 @@
                 <x-auth-input label="Пароль" name="password" type="password" placeholder="Введите пароль"/>
                 <div class="flex items-center justify-between">
                     <x-auth-checkbox name="remember">Запомнить меня</x-auth-checkbox>
-                    <a href="#" class="text-sm text-primary hover:underline">Забыли пароль?</a>
-                </div>
+                    <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">Забыли пароль?</a>                </div>
                 <button type="submit" class="btn btn-primary w-full text-lg font-normal mt-2 transition-all duration-300">
                     Авторизоваться
                 </button>

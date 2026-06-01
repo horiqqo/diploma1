@@ -49,6 +49,7 @@
 
                         @foreach($theme->lessons as $lesson)
                             <div class="flex items-center gap-3 px-4 py-2">
+                                <img src="{{asset('../images/icons/education.svg')}}" alt="иконка обучения" class="w-7 h-7 object-contain" loading="lazy">
                                 <a href="{{ route('lesson', $lesson->id) }}" class="text-primary hover:underline">
                                     {{ $lesson->title }}
                                 </a>
@@ -57,6 +58,7 @@
 
                         @foreach($theme->tests as $test)
                             <div class="flex items-center gap-3 px-4 py-2">
+                                <img src="{{asset('../images/icons/test.svg')}}" alt="иконка тестов" class="w-7 h-7 object-contain" loading="lazy">
                                 <a href="{{ route('test', $test->id) }}" class="text-primary hover:underline">
                                     {{ $test->title }}
                                 </a>

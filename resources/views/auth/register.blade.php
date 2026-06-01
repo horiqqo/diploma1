@@ -2,7 +2,7 @@
 @section('title', 'Регистрация')
 @section('content')
 
-    <div class="min-h-[60vh] flex items-center justify-center px-4">
+    <div class="min-h-[80vh] flex items-center justify-center px-4 py-12">
         <div class="w-full max-w-lg">
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold">Регистрация</h1>
@@ -46,7 +46,7 @@
                 </div>
 
                 <x-auth-checkbox name="agree">
-                    Я согласен на <a href="#" class="text-primary hover:underline">обработку персональных данных</a>
+                    Я согласен на <a href="{{ route('privacy') }}" class="text-primary hover:underline">обработку персональных данных</a>
                 </x-auth-checkbox>
                 @error('agree')
                 <p class="text-error text-sm -mt-3">{{ $message }}</p>

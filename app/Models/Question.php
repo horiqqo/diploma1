@@ -14,7 +14,7 @@ class Question extends Model
     protected $fillable = [
         'test_id',
         'question',
-        'image'
+        'image',
     ];
 
     public function test()

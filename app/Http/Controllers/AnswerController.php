@@ -32,14 +32,19 @@ class AnswerController extends Controller
     public function store(Request $request, Question $question)
     {
         $request->validate([
-            'answer' => 'required|string',
-            'is_correct' => 'nullable',
+            'answer'     => 'required|string|min:1|max:500',
+            'is_correct' => 'nullable|boolean',
+        ], [
+            'answer.required' => 'Текст ответа обязателен',
+            'answer.min'      => 'Ответ должен содержать минимум 1 символ',
+            'answer.max'      => 'Ответ не должен превышать 500 символов',
+            'is_correct.boolean' => 'Некорректное значение поля "правильный ответ"',
         ]);
 
         Answer::create([
             'question_id' => $question->id,
-            'answer' => $request->answer,
-            'is_correct' => $request->has('is_correct'),
+            'answer'      => $request->answer,
+            'is_correct'  => $request->boolean('is_correct'),
         ]);
 
         return redirect()
@@ -55,8 +60,13 @@ class AnswerController extends Controller
     public function update(Request $request, Answer $answer)
     {
         $request->validate([
-            'answer'     => 'required|string|max:255',
-            'is_correct' => 'boolean',
+            'answer'     => 'required|string|min:1|max:500',
+            'is_correct' => 'nullable|boolean',
+        ], [
+            'answer.required' => 'Текст ответа обязателен',
+            'answer.min'      => 'Ответ должен содержать минимум 1 символ',
+            'answer.max'      => 'Ответ не должен превышать 500 символов',
+            'is_correct.boolean' => 'Некорректное значение поля "правильный ответ"',
         ]);
 
         $answer->update([

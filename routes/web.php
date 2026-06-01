@@ -11,6 +11,9 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [PageController::class, 'showRegisterPage'])->name('register');
@@ -18,35 +21,36 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [PageController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/privacy', fn() => view('pages.privacy'))->name('privacy');
+
+    Route::get('/forgot-password', fn() => view('auth.forgot-password'))->name('password.request');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-    // Только для студентов
     Route::middleware('role:student')->group(function () {
         Route::get('/subjects', [SubjectController::class, 'showStudentSubjectsPage'])->name('subjects');
         Route::get('/subjects/{subject}/themes', [ThemeController::class, 'showStudentThemesPage'])->name('themes');
         Route::get('/lesson/{theme}', [LessonController::class, 'showLessonPage'])->name('lesson');
         Route::get('/profile', [ProfileController::class, 'showProfilePage'])->name('profile');
         Route::get('/', [PageController::class, 'showHomePage'])->name('home');
-
-
-
         Route::get('/tests/{test}', [TestController::class, 'show'])->name('test');
-
-
         Route::post('/tests/{test}/submit', [TestController::class, 'submit'])->name('test.submit');
-
         Route::get('/test/{test}/results', [TestController::class, 'results'])->name('test-results');
 
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
     });
 
-    // Только для админа и учителя
+
+
     Route::middleware('role:admin,teacher')->group(function () {
 
         Route::get('/dashboard', [PageController::class, 'showDashboardPage'])->name('dashboard');
@@ -99,18 +103,22 @@ Route::middleware('auth')->group(function () {
         Route::put('/admin/subjects/{subject}', [SubjectController::class, 'update'])->name('admin-subjects-update');
         Route::delete('/admin/subjects/{subject}', [SubjectController::class, 'destroy'])->name('admin-subjects-delete');
 
+        Route::get('/admin/profile/edit', [ProfileController::class, 'edit'])->name('admin-profile-edit');
+        Route::put('/admin/profile/update', [ProfileController::class, 'update'])->name('admin-profile-update');
+
     });
 
-    // Только для админа
+
+
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/users', [UserController::class, 'showAdminUsersListPage'])->name('admin-users');
 
         Route::patch('/admin/users/{user}/role', [UserController::class, 'updateRole'])->name('admin-users-role-update');
         Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin-users-edit');
         Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin-users-update');
+        Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin-users-delete');    });
+});
 
-        Route::get('/admin/profile/edit', [ProfileController::class, 'edit'])->name('admin-profile-edit');
-        Route::put('/admin/profile/update', [ProfileController::class, 'update'])->name('admin-profile-update');
-
-    });
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
 });

@@ -13,7 +13,7 @@
 
             <x-filters :action="route('admin-users')">
                 <select name="role_id" class="select select-bordered font-normal">
-                    <option value="">Все роли</option>
+                    <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все роли</option>
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}" {{ request('role_id') == $role->id ? 'selected' : '' }}>
                             {{ $role->title }}
@@ -22,7 +22,7 @@
                 </select>
 
                 <select name="class_number" class="select select-bordered font-normal">
-                    <option value="">Все классы</option>
+                    <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все классы</option>
                     @for($i = 1; $i <= 11; $i++)
                         <option value="{{ $i }}" {{ request('class_number') == $i ? 'selected' : '' }}>{{ $i }} класс</option>
                     @endfor
@@ -36,7 +36,7 @@
             </x-filters>
 
             <div class="overflow-x-auto mt-6">
-                <table class="table w-full border border-base-200">
+                <table class="table table-fixed w-full border border-base-200">
 
                     <thead>
                     <tr>
@@ -45,7 +45,7 @@
                         <th>Email</th>
                         <th>Роль</th>
                         <th>Класс</th>
-                        <th></th>
+                        <th>Действия</th>
                     </tr>
                     </thead>
 
@@ -100,6 +100,16 @@
                                    class="btn btn-sm btn-primary font-normal">
                                     Редактировать
                                 </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ route('admin-users-delete', $user->id) }}" id="delete-user-{{ $user->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-sm btn-error btn-outline font-normal"
+                                            onclick="confirmDelete('delete-user-{{ $user->id }}', 'Вы уверены, что хотите удалить пользователя {{ $user->name }}?')">
+                                        Удалить
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

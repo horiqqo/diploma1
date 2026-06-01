@@ -21,5 +21,21 @@
 <footer>
     @include('include.footer')
 </footer>
+
+<dialog id="delete-modal" class="modal">
+    <div class="modal-box">
+        <h3 class="text-lg font-bold">Подтверждение удаления</h3>
+        <p id="delete-modal-text" class="py-4 text-base-content/70"></p>
+        <div class="modal-action">
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('delete-modal').close()">Отмена</button>
+            <button id="delete-modal-confirm" class="btn btn-error">Удалить</button>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>Закрыть</button>
+    </form>
+</dialog>
+
+
 </body>
 </html>

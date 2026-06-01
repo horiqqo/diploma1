@@ -27,7 +27,7 @@
 
         <x-filters :action="route('admin-themes')">
             <select name="subject_id" class="select select-bordered font-normal">
-                <option value="">Все предметы</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все предметы</option>
                 @foreach($subjects as $subject)
                     <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>
                         {{ $subject->title }}
@@ -36,14 +36,14 @@
             </select>
 
             <select name="class_number" class="select select-bordered font-normal">
-                <option value="">Все классы</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Все классы</option>
                 @for($i = 1; $i <= 11; $i++)
                     <option value="{{ $i }}" {{ request('class_number') == $i ? 'selected' : '' }}>{{ $i }} класс</option>
                 @endfor
             </select>
 
             <select name="sort" class="select select-bordered font-normal">
-                <option value="">Сортировка</option>
+                <option value="" disabled {{ request('sort') ? '' : 'selected' }}>Сортировка</option>
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>А → Я</option>
                 <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Я → А</option>
             </select>
@@ -51,7 +51,7 @@
 
         <div class="overflow-x-auto">
 
-            <table class="table w-full border border-base-200">
+            <table class="table table-fixed w-full border border-base-200">
 
                 <thead>
 
@@ -87,11 +87,13 @@
                             <a href="{{ route('admin-themes-edit', $theme->id) }}"
                                class="btn btn-sm btn-outline">Изменить</a>
 
-                            <form method="POST" action="{{ route('admin-themes-delete', $theme->id) }}">
+                            <form method="POST" action="{{ route('admin-themes-delete', $theme->id) }}" id="delete-theme-{{ $theme->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-error btn-outline"
-                                        onclick="return confirm('Удалить тему?')">Удалить</button>
+                                        onclick="confirmDelete('delete-theme-{{ $theme->id }}', 'Вы уверены, что хотите удалить эту тему?')">
+                                    Удалить
+                                </button>
                             </form>
                         </td>
 

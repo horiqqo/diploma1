@@ -118,22 +118,21 @@
                 <div class="flex flex-col gap-4 w-full md:w-auto">
                     <h2 class="text-xl md:text-2xl font-bold text-center md:text-left">Перейти к учебным предметам</h2>
                     <div class="grid grid-cols-2 gap-3">
-                        <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-4 md:p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center justify-center md:justify-start gap-3 md:gap-4 min-h-[60px] md:min-h-[70px]">
-                            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">И</span>
-                            Информатика
-                        </a>
-                        <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-4 md:p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center justify-center md:justify-start gap-3 md:gap-4 min-h-[60px] md:min-h-[70px]">
-                            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">М</span>
-                            Математика
-                        </a>
-                        <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-4 md:p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center justify-center md:justify-start gap-3 md:gap-4 min-h-[60px] md:min-h-[70px]">
-                            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">Ая</span>
-                            Английский язык
-                        </a>
-                        <a href="#" class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md hover:-translate-y-1 hover:border-primary/20 p-4 md:p-5 text-base-content/70 hover:text-primary font-medium transition-all duration-300 flex items-center justify-center md:justify-start gap-3 md:gap-4 min-h-[60px] md:min-h-[70px]">
-                            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">Ф</span>
-                            Физика
-                        </a>
+                        @foreach($subjects->take(4) as $subject)
+                            <a href="{{ route('themes', $subject) }}"
+                               class="bg-base-100 border border-base-300 rounded-xl hover:shadow-md
+                  hover:-translate-y-1 hover:border-primary/20 p-4 md:p-5
+                  text-base-content/70 hover:text-primary font-medium
+                  transition-all duration-300 flex items-center
+                  justify-center md:justify-start gap-3 md:gap-4
+                  min-h-[60px] md:min-h-[70px]">
+            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10
+                         flex items-center justify-center text-primary shrink-0">
+                {{ mb_substr($subject->title , 0, 1) }}
+            </span>
+                                {{ $subject->title }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@
         <div class="flex-none hidden md:flex">
             <ul class="menu menu-horizontal gap-2 text-lg">
                 @auth
-                    @if(auth()->user()->role->title === 'student')
+                    @if(auth()->user()?->role?->title === 'student')
                         <li>
                             <a href="{{ route('home') }}" class="rounded-md transition-all duration-200 hover:bg-base-200 hover:scale-105 active:scale-95">
                                 Главная
@@ -22,7 +22,7 @@
                         </li>
                     @endif
 
-                    @if(in_array(auth()->user()->role->title, ['admin', 'teacher']))
+                    @if(auth()->user()->isAdmin() || auth()->user()->isTeacher())
                         <li>
                             <a href="{{ route('dashboard') }}" class="rounded-md transition-all duration-200 hover:bg-base-200 hover:scale-105 active:scale-95">
                                 Панель управления
@@ -35,13 +35,15 @@
                         </li>
                     @endif
 
-                    @if(auth()->user()->role->title === 'admin')
-                        <li>
-                            <a href="{{ route('admin-users') }}" class="rounded-md transition-all duration-200 hover:bg-base-200 hover:scale-105 active:scale-95">
-                                Пользователи
-                            </a>
-                        </li>
-                    @endif
+                    @if(auth()->user()->isAdmin())
+                            <li>
+                                <a href="{{ route('admin-users') }}" class="rounded-md transition-all duration-200 hover:bg-base-200 hover:scale-105 active:scale-95">
+                                    Пользователи
+                                </a>
+                            </li>
+
+
+                        @endif
                 @endauth
             </ul>
         </div>
@@ -113,7 +115,7 @@
 
         <nav class="flex flex-col gap-2 mt-4">
             @auth
-                @if(auth()->user()->role->title === 'student')
+                @if(auth()->user()?->role?->title === 'student')
                     <a href="{{ route('home') }}" class="text-xl py-4 border-b border-base-200 text-base-content/70 hover:text-primary transition">
                         Главная
                     </a>
@@ -125,7 +127,7 @@
 
                 @endif
 
-                @if(in_array(auth()->user()->role->title, ['admin', 'teacher']))
+                @if(auth()->user()->isAdmin() || auth()->user()->isTeacher())
                     <a href="{{ route('dashboard') }}" class="text-xl py-4 border-b border-base-200 text-base-content/70 hover:text-primary transition">
                         Панель управления
                     </a>
@@ -134,7 +136,7 @@
                     </a>
                 @endif
 
-                @if(auth()->user()->role->title === 'admin')
+                @if(auth()->user()->isAdmin())
                     <a href="{{ route('admin-users') }}" class="text-xl py-4 border-b border-base-200 text-base-content/70 hover:text-primary transition">
                         Пользователи
                     </a>
