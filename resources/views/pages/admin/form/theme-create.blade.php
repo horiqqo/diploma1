@@ -33,7 +33,7 @@
                 </x-form-field>
                 <x-form-field label="Буква класса" :error="$errors->first('class_letter')">
                     <select name="class_letter" class="select select-bordered w-full">
-                        @foreach(['А', 'Б', 'В', 'Г'] as $letter)
+                        @foreach(['А','Б','В','Г','Д']  as $letter)
                             <option value="{{ $letter }}" {{ old('class_letter') == $letter ? 'selected' : '' }}>{{ $letter }}</option>
                         @endforeach
                     </select>

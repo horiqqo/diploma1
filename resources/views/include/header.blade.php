@@ -83,8 +83,7 @@
             </div>
 
             @auth
-                <a href="{{ auth()->user()->role->title === 'admin' ? route('dashboard') : route('profile') }}"
-                   class="transition hover:scale-110 duration-200 cursor-pointer">
+                <a href="{{ auth()->user()?->role?->title === 'admin' ? route('dashboard') : route('profile') }}"                   class="transition hover:scale-110 duration-200 cursor-pointer">
                     <img data-icon="profile" src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-7 h-7 object-contain" loading="lazy">
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -172,8 +171,7 @@
                 Сбросить
             </button>
             @auth
-                <a href="{{ auth()->user()->role->title === 'admin' ? route('dashboard') : route('profile') }}"
-                   class="cursor-pointer transition hover:scale-110 duration-200">
+                <a href="{{ auth()->user()?->role?->title === 'admin' ? route('dashboard') : route('profile') }}"                   class="cursor-pointer transition hover:scale-110 duration-200">
                     <img data-icon="profile" src="{{ asset('../images/icons/profile.svg') }}" alt="Профиль" class="w-6 h-6 object-contain" loading="lazy">
                 </a>
                 <form method="POST" action="{{ route('logout') }}">

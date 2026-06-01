@@ -98,7 +98,9 @@
         </div>
 
         <div class="border-t border-base-200 pt-6">
-            <a href="{{ route('register') }}" class="btn btn-outline btn-sm">← Вернуться к регистрации</a>
+            @guest
+                <a href="{{ route('register') }}" class="btn btn-outline btn-sm">← Вернуться к регистрации</a>
+            @endguest
         </div>
 
     </div>

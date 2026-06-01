@@ -22,7 +22,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [PageController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::get('/privacy', fn() => view('pages.privacy'))->name('privacy');
 
     Route::get('/forgot-password', fn() => view('auth.forgot-password'))->name('password.request');
     Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
@@ -30,6 +29,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 });
 
+Route::get('/privacy', fn() => view('pages.privacy'))->name('privacy');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

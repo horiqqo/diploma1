@@ -39,7 +39,7 @@
                 <x-form-field label="Буква" :error="$errors->first('class_letter')">
                     <select name="class_letter" class="select select-bordered w-full">
                         <option value="">Не выбрана</option>
-                        @foreach(['А', 'Б', 'В', 'Г'] as $letter)
+                        @foreach(['А','Б','В','Г','Д']  as $letter)
                             <option value="{{ $letter }}" @selected($letter == $user->class_letter)>
                                 {{ $letter }}
                             </option>

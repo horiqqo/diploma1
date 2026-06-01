@@ -16,7 +16,7 @@
 
             <div class="form-control">
                 <label class="label cursor-pointer justify-start gap-4">
-                    <input type="checkbox" name="is_correct" class="checkbox checkbox-primary">
+                    <input type="checkbox" name="is_correct" value="1" class="checkbox checkbox-primary">
                     <span class="label-text">Правильный ответ</span>
                 </label>
             </div>

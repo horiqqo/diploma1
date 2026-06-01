@@ -36,10 +36,16 @@ class TestController extends Controller
                 ->where('is_correct', true)
                 ->first();
 
-            $userAnswer = $request->answers[$question->id] ?? null;
-
-            if ($correctAnswer && $correctAnswer->id == $userAnswer) {
-                $correct++;
+            if ($question->type === 'choice') {
+                $userAnswer = $request->answers[$question->id] ?? null;
+                if ($correctAnswer && $correctAnswer->id == $userAnswer) {
+                    $correct++;
+                }
+            } else {
+                $userAnswer = trim($request->text_answers[$question->id] ?? '');
+                if ($correctAnswer && mb_strtolower($userAnswer) === mb_strtolower($correctAnswer->answer)) {
+                    $correct++;
+                }
             }
         }
 
@@ -66,7 +72,7 @@ class TestController extends Controller
 
     public function showTestsListPage(Request $request)
     {
-        $query = Test::with('theme.subject');
+        $query = Test::with('theme.subject')->whereHas('theme.subject');
 
         $user = auth()->user();
         if ($user->isTeacher()) {

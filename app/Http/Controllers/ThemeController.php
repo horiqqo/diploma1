@@ -11,7 +11,7 @@ class ThemeController extends Controller
     public function showThemesListPage(Request $request)
     {
         $user = auth()->user();
-        $query = Theme::with('subject');
+        $query = Theme::with('subject')->whereHas('subject');
 
         if ($user->isTeacher()) {
             $subjectIds = $user->subjects()->pluck('id');

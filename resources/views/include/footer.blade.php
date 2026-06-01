@@ -20,7 +20,7 @@
             </div>
             <div class="flex flex-col gap-2">
                 <span class="font-medium">Документы</span>
-                <a href="#" class="text-base-content/70 hover:text-primary transition">Политика обработки персональных данных</a>
+                <a href="{{ route('privacy') }}" class="text-base-content/70 hover:text-primary transition">Политика обработки персональных данных</a>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
 
             <div class="flex flex-col gap-2">
                 <span class="font-medium">Документы</span>
-                <a href="#" class="text-base-content/70 hover:text-primary transition text-sm">Политика обработки персональных данных</a>
+                <a href="{{ route('privacy') }}" class="text-base-content/70 hover:text-primary transition text-sm">Политика обработки персональных данных</a>
             </div>
         </div>
 

@@ -26,10 +26,19 @@
             @endif
 
             @if($lesson->video)
+                @php
+                    $videoUrl = $lesson->video;
+                    if (preg_match('/rutube\.ru\/video\/([\w-]+)/', $videoUrl, $m)) {
+                        $videoUrl = 'https://rutube.ru/play/embed/' . $m[1];
+                    } else if (preg_match('/vk\.com\/video(-?\d+_\d+)/', $videoUrl, $m)) {
+                        $videoUrl = 'https://vk.com/video_ext.php?oid=' . explode('_', $m[1])[0] . '&id=' . explode('_', $m[1])[1];
+                    }
+                @endphp
+                <p class="text-base-content/50 text-sm">Видеоматериал по теме: </p>
                 <div class="rounded-xl overflow-hidden">
                     <iframe
                         class="w-full aspect-video rounded-xl"
-                        src="{{ $lesson->video }}"
+                        src="{{ $videoUrl }}"
                         allowfullscreen>
                     </iframe>
                 </div>

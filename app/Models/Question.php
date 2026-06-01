@@ -15,6 +15,7 @@ class Question extends Model
         'test_id',
         'question',
         'image',
+         'type',
     ];
 
     public function test()

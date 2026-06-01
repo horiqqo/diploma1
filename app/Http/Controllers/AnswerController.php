@@ -41,6 +41,10 @@ class AnswerController extends Controller
             'is_correct.boolean' => 'Некорректное значение поля "правильный ответ"',
         ]);
 
+        if ($request->boolean('is_correct')) {
+            $question->answers()->where('is_correct', true)->update(['is_correct' => false]);
+        }
+
         Answer::create([
             'question_id' => $question->id,
             'answer'      => $request->answer,
@@ -68,6 +72,13 @@ class AnswerController extends Controller
             'answer.max'      => 'Ответ не должен превышать 500 символов',
             'is_correct.boolean' => 'Некорректное значение поля "правильный ответ"',
         ]);
+
+        if ($request->boolean('is_correct')) {
+            $answer->question->answers()
+                ->where('is_correct', true)
+                ->where('id', '!=', $answer->id)
+                ->update(['is_correct' => false]);
+        }
 
         $answer->update([
             'answer'     => $request->answer,

@@ -45,13 +45,16 @@
                         <td>{{ $question->question }}</td>
 
                         <td class="flex items-center gap-2">
-                            <a href="{{ route('admin-answers', $question->id) }}"
-                               class="btn btn-sm btn-primary">Ответы</a>
+                            @if($question->type === 'choice')
+                                <a href="{{ route('admin-answers', $question->id) }}"
+                                   class="btn btn-sm btn-primary">Ответы</a>
+                            @endif
 
                             <a href="{{ route('admin-questions-edit', $question->id) }}"
                                class="btn btn-sm btn-outline">Изменить</a>
 
-                            <form method="POST" action="{{ route('admin-questions-delete', $question->id) }}" id="delete-question-{{ $question->id }}">
+                            <form method="POST" action="{{ route('admin-questions-delete', $question->id) }}"
+                                  id="delete-question-{{ $question->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-sm btn-error btn-outline"

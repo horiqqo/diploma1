@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             $table->foreignId('test_id')->constrained('tests');
+            $table->string('type')->default('choice');
         });
     }
 
@@ -24,6 +25,9 @@ return new class extends Migration
         Schema::table('questions', function (Blueprint $table) {
             $table->dropForeign('test_id');
             $table->dropColumn('test_id');
+            $table->dropForeign('type');
+            $table->dropColumn('type');
+
         });
     }
 };
